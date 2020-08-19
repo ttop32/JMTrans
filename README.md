@@ -15,9 +15,10 @@ afrikaans, albanian, amharic, arabic, armenian, azerbaijani, basque, belarusian,
 ![result](doc/result6.png)
 
 # Acknowledgement and References
-- [Tesseract](https://github.com/tesseract-ocr/tesseract)
+- [SickZil-Machine](https://github.com/KUR-creative/SickZil-Machine)
 - [OpenCV with Python wrapper](https://pypi.org/project/opencv-python/)
 - [Google Translate API for Python](https://pypi.org/project/googletrans/)
+- [Tesseract](https://github.com/tesseract-ocr/tesseract)
 - [Pytesseract](https://pypi.python.org/pypi/pytesseract)
-- [SickZil-Machine](https://github.com/KUR-creative/SickZil-Machine)
 - [nhocr](https://github.com/fireae/nhocr)
+
