@@ -5,5 +5,5 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 
 
 # result
-!(doc/result1.png)
+![result](doc/result1.png)
 
