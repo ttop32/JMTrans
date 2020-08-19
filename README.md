@@ -13,6 +13,7 @@ afrikaans, albanian, amharic, arabic, armenian, azerbaijani, basque, belarusian,
 ![result](doc/result4.png)
 ![result](doc/result5.png)
 ![result](doc/result6.png)
+![result](doc/result7.png)
 
 # Acknowledgement and References
 - [SickZil-Machine](https://github.com/KUR-creative/SickZil-Machine)
