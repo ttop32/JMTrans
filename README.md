@@ -1,5 +1,5 @@
 # manga translator
- get translated manga from Hitomi url using SickZil(tensorflow) and pytesseract ocr
+ get translated manga from Hitomi url(japanse manga) using SickZil(tensorflow) and pytesseract ocr
  
 https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sharing
 
