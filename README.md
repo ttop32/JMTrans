@@ -1,10 +1,10 @@
 # manga translator
-get japanese manga from from Hitomi to translate manga image using SickZil(tensorflow model), ocr(pytesseract ocr and nhocr) and googletrans
+get japanese manga from Hitomi to translate manga image using SickZil(tensorflow model), ocr(pytesseract ocr and nhocr) and googletrans
  
 https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sharing
 
 # Supported Languages (for destination translation)
-afrikaans, albanian, amharic, arabic, armenian, azerbaijani, basque, belarusian, bengali, bosnian, bulgarian, catalan, cebuano, chichewa, chinese (simplified), chinese (traditional), corsican, croatian, czech, danish, dutch, english, esperanto, estonian, filipino, filipino, finnish, french, frisian, galician, georgian, german, greek, gujarati, haitian creole, hausa, hawaiian, hebrew, hebrew, hindi, hmong, hungarian, icelandic, igbo, indonesian, irish, italian, japanese, javanese, kannada, kazakh, khmer, korean, kurdish (kurmanji), kyrgyz, lao, latin, latvian, lithuanian, luxembourgish, macedonian, malagasy, malay, malayalam, maltese, maori, marathi, mongolian, myanmar (burmese), nepali, norwegian, pashto, persian, polish, portuguese, punjabi, romanian, russian, samoan, scots gaelic, serbian, sesotho, shona, sindhi, sinhala, slovak, slovenian, somali, spanish, sundanese, swahili, swedish, tajik, tamil, telugu, thai, turkish, ukrainian, urdu, uzbek, vietnamese, welsh, xhosa, yiddish, yoruba, zulu
+afrikaans, albanian, amharic, arabic, armenian, azerbaijani, basque, belarusian, bengali, bosnian, bulgarian, catalan, chichewa, chinese (simplified), chinese (traditional), corsican, croatian, czech, danish, dutch, english, esperanto, estonian, filipino, filipino, finnish, french, frisian, galician, georgian, german, greek, gujarati, haitian creole, hausa, hawaiian, hindi,  hungarian, icelandic, igbo, indonesian, irish, italian, japanese,  kazakh, khmer, korean, kurdish (kurmanji), kyrgyz, lao, latin, latvian, lithuanian, luxembourgish, macedonian, malagasy, malay, malayalam, maltese, maori, marathi, mongolian, myanmar (burmese), nepali, norwegian, pashto, persian, polish, portuguese, punjabi, romanian, russian, samoan, scots gaelic, serbian, sesotho, shona, sindhi, sinhala, slovak, slovenian, somali, spanish, sundanese, swahili, swedish, tajik, tamil,  thai, turkish, ukrainian, urdu, uzbek, vietnamese, welsh, xhosa, yiddish, yoruba, zulu
 
 # result
 ![result](doc/result1.png)
