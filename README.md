@@ -22,4 +22,6 @@ afrikaans, albanian, amharic, arabic, armenian, azerbaijani, basque, belarusian,
 - [Tesseract](https://github.com/tesseract-ocr/tesseract)
 - [Pytesseract](https://pypi.python.org/pypi/pytesseract)
 - [nhocr](https://github.com/fireae/nhocr)
+- [text-detection](https://github.com/qzane/text-detection)
+
 
