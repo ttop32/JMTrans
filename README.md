@@ -1,5 +1,5 @@
 # manga translator
-get japanese manga from Hitomi to translate manga image using SickZil(tensorflow model), ocr(pytesseract ocr and nhocr) and googletrans
+get japanese manga from url to translate manga image using SickZil(tensorflow model), ocr(pytesseract ocr and nhocr) and googletrans
  
 https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sharing
 
