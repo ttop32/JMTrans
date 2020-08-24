@@ -14,11 +14,11 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 ![result](doc/result7.png)
 
 # Workflow
-use gallery-dl to get managa from url 
-do text segmentation from manga image using SickZil
-get text from image using pytesseract ocr and nhocr
-translating using googletrans
-use pil to place translated text
+- use gallery-dl to get managa from url 
+- do text segmentation from manga image using SickZil
+- get text from image using pytesseract ocr and nhocr
+- translating using googletrans
+- use pil to place translated text
 
 # Supported Languages (for destination translation)
 For translating, it uses google trans. It supports :
