@@ -1,6 +1,7 @@
 # manga translator
 get japanese manga from url to translate manga image using SickZil(tensorflow model), ocr(pytesseract ocr and nhocr) and googletrans
  
+This project code is still under processing on the colab environment. For use, run colab in below url.
 https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sharing
 
 # Supported Languages (for destination translation)
