@@ -27,7 +27,7 @@ afrikaans, albanian, amharic, arabic, armenian, azerbaijani, basque, belarusian,
 
 # Supported url
 gallery-dl is used to download. Its support sites are:
-- [text-detection](https://github.com/mikf/gallery-dl/blob/master/docs/supportedsites.rst)
+- [supported site list](https://github.com/mikf/gallery-dl/blob/master/docs/supportedsites.rst)
 
 # Acknowledgement and References
 - [SickZil-Machine](https://github.com/KUR-creative/SickZil-Machine)
