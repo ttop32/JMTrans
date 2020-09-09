@@ -1,0 +1,1305 @@
+
+<!-- Write your comments here 
+
+-->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    min-width: 250px;
+
+    /*no mouse scroll select */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+    /*no mouse drag */
+    -webkit-user-drag: none;
+    -webkit-app-region: no-drag;
+    user-drag: none;
+    app-region: no-drag;
+
+
+  background: #f9f9f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+img{-webkit-user-drag: none;}
+
+
+ /* -----------------loader------------------- */
+ 
+.loader_parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+    
+ 
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid #3498db;
+  width: 60px;
+  height: 60px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  margin:30px;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+ /* -----------------scroll------------------- */
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+ 
+ 
+ 
+ 
+ /* -----------------main url bar box------------------- */
+
+.header {
+padding: 30px 40px;
+background: rgb(2,0,36);
+background: linear-gradient(30deg, rgba(2,0,36,1) 0%, rgba(45,14,89,1) 28%, rgba(0,31,115,1) 65%, rgba(32,0,22,1) 100%);
+}
+.wrapper{
+  height: 100px;
+  position: relative;
+  background: linear-gradient(135deg, #14ffe9, #ffeb3b, #ff00e0);
+  border-radius: 10px;
+  cursor: default;
+  animation: animate 2.5s linear infinite;
+}
+.wrapper .display,
+.wrapper span{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.wrapper .display{
+  z-index: 999;
+  position: relative; 
+  margin: 0px 20px 0px 0px;
+  
+  
+  background: #121212;
+  border-radius: 6px;
+  text-align: center;
+}
+@keyframes animate {
+  100%{
+    filter: hue-rotate(360deg);
+  }
+}
+.wrapper span{
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  background: inherit;
+}
+.wrapper span:first-child{
+  filter: blur(7px);
+}
+.wrapper span:last-child{
+  filter: blur(20px);
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /* -----------------main url bar cotent------------------- */
+
+ 
+.urlBar {
+    display: flex;                  /* establish flex container */
+    flex-direction: row;            /* default value; can be omitted */
+    flex-wrap: nowrap;              /* default value; can be omitted */
+    justify-content:space-between;
+    overflow: auto;
+    padding: 0px 0px 0px 0px;
+    background: transparent;
+   
+    align-items:center;
+}
+img#favicon{
+  width: 50px;
+  height: 50px;
+  margin:10px;
+}
+input[type="search"] {   
+    background: transparent;
+    border-width:0px;
+    border:none;
+    color: #ffffff; 
+    width:5000px;
+    margin: 0px 80px 0px 0px;
+    font-size: 25px; 
+    letter-spacing: 1px;
+    
+    
+    height:80px;
+    bottom:0px;
+    top:0px;
+     
+}
+input[type="search"]:focus {
+    outline-width: 0;
+}
+input[type="search"]::-webkit-search-cancel-button {
+-webkit-appearance: none;
+display: inline-block;
+width: 30px;
+height: 30px;
+cursor:pointer;
+background:
+    linear-gradient(45deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 18%,#fff 20%,#fff 30%,rgba(0,0,0,0) 32%,rgba(0,0,0,0) 100%),
+    linear-gradient(135deg, rgba(0,0,0,0) 0%,rgba(0,0,0,0) 18%,#fff 20%,#fff 30%,rgba(0,0,0,0) 32%,rgba(0,0,0,0) 100%);
+}
+
+
+
+
+
+
+
+
+
+ /* -----------------main download list------------------- */
+
+
+ul {
+  margin: 0;
+  padding: 0;
+  box-shadow: inset 0 10px 10px -10px; 
+  width:100%;
+  height:auto;
+  height:100%;
+  background: #f9f9f9;
+}
+
+
+/* Style the list items */
+ul li {
+  list-style-type: none;
+  background: #eee;
+  font-size: 18px;
+  transition: 0.2s; 
+  
+  display: flex;
+  flex-direction: column ;
+}
+ul li:first-child  {
+  box-shadow: inset 0 10px 10px -10px ;
+}
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+  background: #f9f9f9;
+}
+/* Darker background-color on hover */
+ul li:hover {
+  background: #ddd;
+}
+
+
+
+ 
+/* list image */
+.li_img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    cursor:pointer;
+    border-radius: 3px;
+    border:0px;
+}
+img#thumb{
+}
+div.imgTooltip {
+    position:absolute;
+}
+
+
+
+
+
+
+
+/* Style the list items */
+.li_contents {
+padding: 12px 12px 12px 12px;  
+display: flex;
+flex-direction: row ;
+justify-content: space-between;
+}
+
+.li_contents_text{
+  display: flex;
+  flex-direction: column ;
+  width:100%;
+  
+}
+
+
+
+.li_title{
+  text-overflow: ellipsis;
+  overflow: hidden; 
+      height: 85px;
+      width:auto;
+      text-align:left;
+}
+.li_info_box{
+  display: flex;
+  flex-direction: row ;
+  justify-content: flex-end;
+  align-items:center;
+  position:relative;
+  
+}
+
+.li_info_icon{
+width:15px;
+height:15px;
+margin:0px 5px;
+}
+
+#empty{
+  box-shadow: inset 0 10px 10px -10px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f9f9f9;
+  
+}
+#empty_container{ 
+  text-align: center;
+  margin:50px 0px 0px 0px;
+  
+}
+#empty_icon{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  
+  
+
+}
+
+
+
+ /* -----------------main download progress------------------- */
+
+
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+}
+@keyframes animatedBackground {
+  from {    background-position: 0px 0px; }
+  to {    background-position: 100% 0px; } 
+}
+.progress_bar {
+    height: 8px;
+    
+    width: 0%;
+    
+    
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;   
+    background-position: 0% 0%;
+    background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
+    background-size: 500% auto;
+    animation: animatedBackground 3s linear infinite; 
+}
+ 
+ul li:nth-child(2n) .progress_bar{animation-delay: -0.5s;} 
+ul li:nth-child(3n) .progress_bar{animation-delay: -1.5s;} 
+ul li:nth-child(5n) .progress_bar{animation-delay: -2.5s;} 
+ul li:nth-child(7n) .progress_bar{animation-delay: -1.0s;} 
+ul li:nth-child(11n) .progress_bar{animation-delay: -2.0s;}
+ul li:nth-child(2n+1) .progress_bar{animation-delay: -0.3s;} 
+ul li:nth-child(3n+1) .progress_bar{animation-delay: -1.2s;} 
+ul li:nth-child(5n+1) .progress_bar{animation-delay: -2.3s;} 
+ul li:nth-child(7n+1) .progress_bar{animation-delay: -1.2s;} 
+ul li:nth-child(11n+1) .progress_bar{animation-delay: -2.2s;}
+
+
+
+
+
+ /* -----------------setting page------------------- */
+
+.setting_page{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  clip-path: circle(20px at calc(100% - 95px) 80px);
+  transition: all 0.3s ease-in-out;
+  z-index:100;
+  
+}
+#active:checked ~ .setting_page{
+  clip-path: circle(75%);  
+}
+.setting_container {
+    background-color: #f2f2f2;
+    padding: 30px 50px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+
+    background: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    box-shadow : 2px 2px 2px 1px rgba(0, 0, 0, 0.2)
+}
+
+
+
+
+
+/* -----------------setting option box------------------- */
+
+.optionBoxContainer {
+}
+
+.select-box {
+  display: flex;
+  width: 400px;
+  flex-direction: column;
+  
+}
+
+.select-box .options-container {
+  background: #2f3640;
+  color: #f5f6fa;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+
+  order: 1;
+  
+  width:400px;
+  position:absolute;
+  z-index:10;
+
+}
+
+.selected {
+  background: #2f3640;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #f5f6fa;
+  position: relative;
+
+  order: 0;
+  
+}
+
+.selected::after {
+  content: "";
+  background: url("icon/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  position: absolute;
+  height: 100%;
+
+  transition: all 0.4s;
+}
+
+.select-box .options-container.active {
+  max-height: 150px;
+  opacity: 1;
+  overflow-y: scroll;
+  
+
+}
+
+.select-box .options-container.active + .selected::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+.select-box .options-container::-webkit-scrollbar {
+  width: 8px;
+  background: #0d141f;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  background: #525861;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .option,
+.selected {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+.select-box .option:hover {
+  background: #414b57;
+}
+
+.select-box label {
+  cursor: pointer;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+
+
+
+
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 0px solid #ccc;
+  background: #2f3640;
+  color: #f5f6fa;
+  border-radius: 8px;
+}
+
+
+
+ /* -----------------setting button------------------- */
+
+.menu-btn{
+  position: absolute;
+  z-index: 2;
+  right: 70px;  
+  top: 55px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+  
+
+  transition: all 0.3s ease-in-out;
+  background: transparent;
+  z-index:102;
+    background:black;
+}
+.menu-btn:hover{
+background: linear-gradient(-135deg, #c850c0, #4158d0);
+    
+    background: #333;
+}
+
+#active:checked ~ .menu-btn{
+  background: #fff;
+  color: #4158d0;
+
+}
+
+input[type="checkbox"]{
+  display: none;
+}
+.bar_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  cursor: pointer;
+}
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  margin: 6px 0;
+  transition: 0.4s;
+  background-color:white;
+}
+
+#active:checked ~ .menu-btn .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+  background-color: #333; 
+}
+#active:checked ~ .menu-btn .bar2 {
+opacity: 0;
+}
+#active:checked ~ .menu-btn .bar3 {
+  background-color: #333;
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+
+
+
+
+
+
+/* -----------------start page------------------- */
+
+
+.mySlides {display: none}
+
+
+
+.slide_img {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+
+
+.myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  height:100%;
+  width:auto;
+  
+}
+
+
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  
+  margin:20px 2px;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+}
+.content_text{
+  padding: 20px 100px;
+  display: none
+}
+
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
+}
+
+
+
+/* -----------------popup message------------------- */
+/* The snackbar - position it at the bottom and in the middle of the screen */
+#snackbar {
+  visibility: hidden; /* Hidden by default. Visible on click */
+  min-width: 250px; /* Set a default minimum width */
+  margin-left: -125px; /* Divide value of min-width by 2 */
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff; /* White text color */
+  text-align: center; /* Centered text */
+  border-radius: 2px; /* Rounded borders */
+  padding: 16px; /* Padding */
+  position: fixed; /* Sit on top of the screen */
+  z-index: 100; /* Add a z-index if needed */
+  left: 50%; /* Center the snackbar */
+  bottom: 30px; /* 30px from the bottom */
+}
+
+/* Show the snackbar when clicking on a button (class added with JavaScript) */
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 9.5s;
+  animation: fadein 0.5s, fadeout 0.5s 9.5s;
+}
+
+/* Animations to fade the snackbar in and out */
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
+
+
+/* -----------------page display------------------- */
+
+
+#start_page{
+display:none;
+
+}
+#main_page{
+display:none;
+}
+
+
+
+
+</style>
+</head>
+<body>
+
+
+<div id="snackbar">Some text some message..</div>
+
+
+<div id="start_page" class="fade">
+
+
+    <div class="slideshow-container">
+    <div class="mySlides fade"> <video autoplay muted loop class="myVideo">  <source src="video/start1.webm" type="video/webm">  Your browser does not support HTML5 video.   </video></div>
+    <div class="mySlides fade"> <video autoplay muted loop class="myVideo">  <source src="video/start2.webm" type="video/webm">  Your browser does not support HTML5 video.   </video></div>
+    <div class="mySlides fade"> <video autoplay muted loop class="myVideo">  <source src="video/start3.webm" type="video/webm">  Your browser does not support HTML5 video.   </video></div>
+    
+    </div>
+
+
+
+    <div class="content">
+        <div class="content_text fade">
+            <h1>Google Authetication</h1>
+            <p>To use the Google OCR, you need to authenticate Google Drive API. Click open button to enable the Drive API to download credentials.json
+            </p>
+            <button id="myBtn" onclick="openBrowser('https://developers.google.com/drive/api/v3/quickstart/python')">Open</button>  
+        </div>
+        <div class="content_text fade">
+            <h1>Google Scope </h1>
+            <p>You need to verify Google authetication scope.<br>
+            Click open button to set the scope.
+
+            </p>
+            <button id="myBtn" onclick="getGoogleCred()">Open</button>  
+        </div>
+        <div class="content_text fade">
+            <h1>EzTransXP Ehnd</h1>
+            <p>For using the EzTransXP, Ehnd installation is required.<br>
+            Click open button to download Ehnd to install.
+
+            </p>
+            <button id="myBtn" onclick="openBrowser('https://blog.naver.com/waltherp38/221062272423')">Open</button> 
+        </div>
+        
+      
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(1)"></span> 
+      <span class="dot" onclick="currentSlide(2)"></span> 
+      <span class="dot" onclick="currentSlide(3)"></span> 
+    </div>
+    </div>
+</div>
+
+
+
+
+<div id="main_page" class="fade">
+
+    <input type="checkbox" id="active">
+    <label for="active" class="menu-btn">
+    <div class="bar_container" onclick="myFunction(this)">
+    <div class="bar1"></div>
+    <div class="bar2"></div>
+    <div class="bar3"></div>
+    </div>
+    </label>
+
+
+    <div class="setting_page" id="setting_page">    
+    <div class="setting_container" id="setting_container" >
+        <!--
+        <div class="optionBoxContainer">
+          <h2>PW</h2>
+        <input type="text" id="id" placeholder="PW">
+        </div>
+        <div class="optionBoxContainer">
+          <h2>ID</h2>
+        <input type="text" id="pw" placeholder="ID">
+        </div>
+        -->
+    
+        <div class="optionBoxContainer">
+          <h2>Translator</h2>
+
+          <div class="select-box">
+            <div class="options-container">
+              
+
+              <div class="option">
+                <input type="radio" class="radio" id="google" name="category" />
+                <label for="google">Google</label>
+              </div>
+
+              <div class="option">
+                <input type="radio" class="radio" id="eztrans" name="category" />
+                <label for="eztrans">EZtrans XP</label>
+              </div>
+            </div>
+
+            <div class="selected">
+              Google
+            </div>
+            
+          </div>
+        </div>
+        <div class="optionBoxContainer">
+          <h2>Language</h2>
+
+          <div class="select-box">
+            <div class="options-container">
+              
+              <div class="option">
+                <input type="radio" class="radio" id="ko" name="category" />
+                <label for="ko">Korea</label>
+              </div>
+
+              <div class="option">
+                <input type="radio" class="radio" id="en" name="category" />
+                <label for="en">English</label>
+              </div>
+
+            </div>
+
+            <div class="selected">
+              Korea
+            </div>
+          </div>
+        </div>
+        <div class="optionBoxContainer">
+          <h2>Font Style</h2>
+
+          <div class="select-box">
+            <div class="options-container">
+              
+
+              <div class="option">
+                <input type="radio" class="radio" id="Times" name="category" />
+                <label for="Times">Times</label>
+              </div>
+            </div>
+
+            <div class="selected">
+              Times
+            </div>
+          </div>
+        </div>
+        
+        <div class="optionBoxContainer">
+          <h2>Font Size</h2>
+
+          <div class="select-box">
+            <div class="options-container">
+              <div class="option">
+                <input type="radio" class="radio" id="10" name="category" />
+                <label for="10">10</label>
+              </div>
+
+            </div>
+
+            <div class="selected">
+              10
+            </div>
+          </div>
+        </div>
+        
+        </div>
+        </div>    
+        
+        
+
+                                
+        <div id="myDIV" class="header">
+        <div class="wrapper">
+        <div class="display">
+                    <div class="urlBar" >
+                    <img src="icon/main_icon.png" id="favicon"> 
+                    <input type="search" id="myInput" placeholder="Type URL" class="form-control" autocomplete="off"  />
+                    
+                    </div>
+                    
+        </div>  <span></span>  <span></span>  </div></div>
+          
+          
+          
+        <div id="empty">
+        <div id="empty_container">
+        <img id="empty_icon" src="icon/box.png"  /> no item
+        </div>    </div>    
+
+
+        <ul id="myUL">
+        
+            <!--
+                  <li id="test">
+          
+          <div class="li_contents">   
+             <img class="li_img" src="icon/main_icon.png"  id="thumb"/> 
+               
+               <div class="li_contents_text">   
+              
+              <div class="li_title">
+                it the gymt the gymHitit the gymHit the gymHit Hit the gymHit the gymHit the gymHit the gymHit the gymHit the gymHit the gymHit the gymHit the gymHit the gymHit the gymHit the gymHit the gymHit the gym
+                </div>  
+              
+              <div class="li_info_box">
+                <img src="icon/photo.png"  class="li_info_icon"/> 
+                <div class="li_info_time">html  </div>
+                <img src="icon/photo.png"  class="li_info_icon"/> 
+                <div class="li_info_pages">12p   </div>
+                </div>
+            
+            </div>             
+            </div> 
+                
+          
+          <div class="progress-container">
+            <div class="progress_bar" ></div>
+          </div>
+
+          </li>
+           -->
+        
+        </ul>
+
+
+
+           
+
+
+</div>
+
+
+<div id="testdiv"></div>
+
+<script>
+//message=====================================
+function showMessage(msg) {
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
+
+  x.innerHTML=msg
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 10 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 10000);
+}
+
+
+//start page=====================================
+
+
+var slideIndex = 1;
+showSlides(slideIndex);
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+function showSlides(n) {
+
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+   
+  if (n > slides.length) {
+    document.getElementById("start_page").style.display = "none"; 
+    document.getElementById("main_page").style.display = "block"; 
+     return;
+  }   // overflow reutrn to 1 
+  
+  if (n < 1) {slideIndex = 1}               // lowerflow
+  for (i = 0; i < slides.length; i++) {     // disable all slide visibility
+      slides[i].style.display = "none";  
+  } 
+  for (i = 0; i < dots.length; i++) {       //disable all dots color
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  //set slide image
+  dots[slideIndex-1].className += " active";    //set dots 
+  
+  var context = document.getElementsByClassName("content_text");
+  for (i = 0; i < context.length; i++) {     // disable all slide visibility
+      context[i].style.display = "none";  
+  } 
+  context[slideIndex-1].style.display = "block";  //set slide image
+  
+  
+  
+  if (slideIndex == 1) {
+    checkCredentialsDownloaded(); 
+  } else if (slideIndex == 2) {
+    checkCredScope();  
+  } else if (slideIndex == 3) {
+    checkEhnd();  
+  } 
+
+
+
+}
+
+
+
+
+
+
+
+
+//list image hovering =====================================
+
+var Controls = {
+    init: function () {
+        var imgLink = document.querySelectorAll("[id^=thumb]");
+        for (var i=0; i<imgLink.length; i++){
+             imgLink[i].addEventListener('mouseover', Controls.mouseOverListener, false );
+            imgLink[i].addEventListener('mouseout', Controls.mouseOutListener, false );
+        }
+    },
+    
+    mouseOverListener: function ( event ) {
+        Controls.displayTooltip ( this );
+    },
+    
+    mouseOutListener: function ( event ) {
+        Controls.hideTooltip ( this );
+    },
+    
+    displayTooltip: function ( imgLink ) {
+        var tooltip = document.createElement ( "div" );
+        var fullImg = document.createElement ( "img" );
+        
+        fullImg.src = imgLink.src;
+        tooltip.appendChild ( fullImg );
+        tooltip.className = "imgTooltip fade";
+        
+        tooltip.style.top =  "40px";
+        fullImg.style.width =  "300px";
+        fullImg.style.height=  "auto";
+        fullImg.style.boxShadow=  "2px 2px 2px 1px rgba(0, 0, 0, 0.2)" 
+        fullImg.style.position = "absolute";
+        fullImg.style.zIndex =  "100";
+
+        
+        imgLink._tooltip = tooltip;
+        Controls._tooltip = tooltip;
+        imgLink.parentNode.appendChild ( tooltip );
+        imgLink.addEventListener ( "mousemove", Controls.followMouse, false);
+    },
+    
+    hideTooltip : function ( imgLink ) {
+        imgLink.parentNode.removeChild ( imgLink._tooltip );
+        imgLink._tooltip = null;
+        Controls._tooltip = null;
+    },
+    
+    mouseX: function ( event ) {
+        if ( !event ) event = window.event;
+        if ( event.pageX ) return event.pageX;
+        else if ( event.clientX ) 
+            return event.clientX + (document.documentElement.scrollLeft ?
+                                    document.documentElement.scrollLeft :                 
+                                    document.body.scrollLeft); 
+        else return 0;
+    },
+    
+    mouseY: function ( event ) {
+        if (!event) event = window.event; 
+        if (event.pageY) return event.pageY; 
+        else if (event.clientY) 
+            return event.clientY + (document.documentElement.scrollTop ?     
+                                    document.documentElement.scrollTop : 
+                                    document.body.scrollTop); 
+        else return 0;
+    },
+    
+    followMouse: function ( event ) {
+        var tooltip = Controls._tooltip.style;
+        var offX = 15, offY = 15;
+        
+        tooltip.left = (parseInt(Controls.mouseX(event))+offX) + 'px';
+        tooltip.top = (parseInt(Controls.mouseY(event))+offY) + 'px';
+    }       
+};
+
+Controls.init();
+
+
+
+
+
+//setting select box =====================================
+
+function initSettingBoxList(){
+    var containers=document.getElementsByClassName("optionBoxContainer");
+    Array.prototype.forEach.call(containers, function(cont) {
+    cont.querySelector(".selected").addEventListener("click", () => {
+        Array.prototype.forEach.call(containers, function(cont2) {
+            cont2.querySelector(".options-container").classList.remove("active");      
+        });
+        cont.querySelector(".options-container").classList.toggle("active");
+    });
+
+    cont.querySelectorAll(".option").forEach(o => {
+      o.addEventListener("click", () => {
+        
+        cont.querySelector(".selected").innerHTML = o.querySelector("label").innerHTML;
+        
+        setINIValue(cont.querySelector("h2").className,o.querySelector("label").innerHTML);
+        
+        cont.querySelector(".options-container").classList.remove("active");
+      });
+    });
+    });
+}
+
+function createSettingBoxList(content) {
+document.getElementById("setting_container").innerHTML=content;
+initSettingBoxList();
+} 
+//================================list item
+
+
+
+function addListItem(msg){
+    
+    document.getElementById("empty").style.display="none";
+    
+    var ulItem=document.getElementById("myUL");
+    ulItem.innerHTML = msg+ulItem.innerHTML;
+    Controls.init();
+}
+function changeListItem(id,msg){
+    var liItem=document.getElementById(id);
+    liItem.innerHTML = msg;
+    Controls.init();
+}
+
+
+function removeListItem(id){
+    var liItem=document.getElementById(id);
+    liItem.remove(); 
+}
+
+
+function setItemProgress(id,progress,time) {
+ const liItem=document.getElementById(id);
+ liItem.getElementsByClassName("progress_bar")[0].style.width =progress+"%";
+ liItem.getElementsByClassName("li_info_time")[0].innerHTML=time;
+}
+
+
+//--------------------------url input
+
+
+// Execute a function when the user releases a key on the keyboard
+document.getElementById("myInput").addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    
+    processInputUrl(document.getElementById("myInput").value);
+  }
+});
+
+
+//------show page
+
+function showPage(name) {
+    if (name=="start_page"){
+    document.getElementById("start_page").style.display="block";
+    document.getElementById("main_page").style.display="none";
+    }else{
+    document.getElementById("start_page").style.display="none";
+    document.getElementById("main_page").style.display="block";
+    }
+}
+
+    
+</script>
+</body>
+</html>
