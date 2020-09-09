@@ -42,15 +42,15 @@ gallery-dl is used to download. Its support sites are:
 
 
 # pip requirements 
-pip install tensorflow==1.14.0 
-pip install googletrans 
-pip install tqdm  funcy PyQt5  opencv-python Pillow
-pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
-pip install pyinstaller
-pip install cefpython3
-pip install pywin32
-pip install matplotlib
-pip install imageio
-pip install pyinstaller
+pip install tensorflow==1.14.0  
+pip install googletrans   
+pip install tqdm  funcy PyQt5  opencv-python Pillow  
+pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib  
+pip install pyinstaller  
+pip install cefpython3  
+pip install pywin32  
+pip install matplotlib  
+pip install imageio  
+pip install pyinstaller  
 
 
