@@ -41,6 +41,7 @@ gallery-dl is used to download. Its support sites are:
 - [ehnd](https://github.com/sokcuri/ehnd)
 - [cefpython](https://github.com/cztomczak/cefpython)
 - [google drive](https://developers.google.com/drive/api/v3/quickstart/python)
+- [gallery-dl](https://github.com/mikf/gallery-dl)
 
 
 # pip requirements 
