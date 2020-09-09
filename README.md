@@ -1,10 +1,10 @@
 # JMTrans - Japanese Manga Translator
 get japanese manga from url to translate manga image using SickZil(tensorflow model), google ocr and eztrans xp
   
-download latest version  (using eztrans xp translator, korean only)
+download latest version  (using eztrans xp translator, korean only)  
 https://github.com/ttop32/JMTrans/releases/latest/download/JMTrans.zip
   
-pre released colab version  (using google translator, suport multi lang)
+pre released colab version  (using google translator, suport multi lang)  
 https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sharing
 
 
