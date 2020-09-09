@@ -1,7 +1,7 @@
 import os
 originalWorkingPath=os.getcwd()
 import sys
-sys.path.append("./lib/SickZil-Machine/src")
+sys.path.append("./lib_/SickZil-Machine/src")
 import tensorflow as tf
 import core
 import imgio

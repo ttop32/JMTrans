@@ -24,7 +24,7 @@ class TextTranslator():
     def translateEztrans(self,text):
         with open('input.txt', 'wb') as f:
             pickle.dump(text, f)    
-        p = subprocess.Popen(('./lib/ez_trans.exe'))
+        p = subprocess.Popen(('./lib_/ez_trans.exe'))
         p.wait()       
         with open('output.txt', 'rb') as f:
             text = pickle.load(f)

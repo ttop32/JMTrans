@@ -7,7 +7,7 @@ class DownloaderManager():
         pass
     
     def downloadUrl(self, url):
-        p = subprocess.Popen(('./lib/gallery-dl.exe', url))
+        p = subprocess.Popen(('./lib_/gallery-dl.exe', url))
         p.wait()   
         downloadFileList,mangaName=self.getDownloadedFilePathList()
         return  downloadFileList,mangaName

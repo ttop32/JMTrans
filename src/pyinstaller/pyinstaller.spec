@@ -23,7 +23,7 @@ a = Analysis(
     hookspath=["."],  # To find "hook-cefpython3.py"
     cipher=cipher_obj,
     pathex=[r"C:\Users\tsop3\anaconda3\envs\py35\Lib\site-packages\PyQt5\Qt\bin",
-    "../lib/SickZil-Machine/src"],
+    "../lib_/SickZil-Machine/src"],
     hiddenimports=[]
     
 )
