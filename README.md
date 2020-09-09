@@ -55,6 +55,4 @@ pip install cefpython3
 pip install pywin32  
 pip install matplotlib  
 pip install imageio  
-pip install pyinstaller  
-
 
