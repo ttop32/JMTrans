@@ -26,7 +26,7 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 - use pil to place translated text
 
 
-# Supported url
+# Supported URL
 gallery-dl is used to download. Its support sites are:
 - [supported site list](https://github.com/mikf/gallery-dl/blob/master/docs/supportedsites.rst)
 
@@ -44,7 +44,7 @@ gallery-dl is used to download. Its support sites are:
 - [gallery-dl](https://github.com/mikf/gallery-dl)
 
 
-# PIP requirements 
+# pip requirements 
 python3.5  
 pip install tensorflow==1.14.0  
 pip install googletrans   
