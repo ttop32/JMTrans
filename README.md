@@ -39,6 +39,7 @@ gallery-dl is used to download. Its support sites are:
 - [text-detection](https://github.com/qzane/text-detection)
 - [ehnd](https://github.com/sokcuri/ehnd)
 - [cefpython](https://github.com/cztomczak/cefpython)
+- [google drive](https://developers.google.com/drive/api/v3/quickstart/python)
 
 
 # pip requirements 
