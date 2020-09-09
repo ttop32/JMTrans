@@ -22,7 +22,7 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 - do text segmentation from manga image using SickZil
 - use opencv to crop text image based on text segmentation results
 - get text from image using pytesseract ocr and nhocr
-- translating using googletrans
+- translating
 - use pil to place translated text
 
 
