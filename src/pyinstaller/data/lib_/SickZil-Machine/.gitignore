@@ -1,0 +1,12 @@
+*.zip
+*.vim
+*.odt
+
+__pycache__/
+*.taghl
+tags
+*.pb
+
+!.gitignore
+!.gitkeep
+test/private_fixtures/
