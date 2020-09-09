@@ -1,5 +1,5 @@
 # JMTrans - Japanese Manga Translator
-get japanese manga from url to translate manga image using SickZil(tensorflow model), google ocr and googletrans
+get japanese manga from url to translate manga image using SickZil(tensorflow model), google ocr and eztrans xp
  
 This project code is still under processing on the colab environment. For use, run colab in below url.
 https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sharing
