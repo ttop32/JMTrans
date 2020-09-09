@@ -8,7 +8,7 @@ pre released colab version  (using google translator, suport multi lang)
 https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sharing
 
 
-# result
+# Result
 ![result](doc/result1.png)
 ![result](doc/result2.png)
 ![result](doc/result3.png)
@@ -44,7 +44,7 @@ gallery-dl is used to download. Its support sites are:
 - [gallery-dl](https://github.com/mikf/gallery-dl)
 
 
-# pip requirements 
+# PIP requirements 
 python3.5  
 pip install tensorflow==1.14.0  
 pip install googletrans   
