@@ -1,18 +1,16 @@
-import win32clipboard
+import pyperclip
 import webbrowser
 import re
 import requests
-import configparser
-
 import threading
 from tqdm import tqdm
 import time
-
 import sys
 import os
 import pickle        
 from urllib.parse import urlparse
 import shutil
+from datetime import datetime 
 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -20,25 +18,35 @@ from google.auth.transport.requests import Request
 
 from manga_translator_gui import MangaTranslatorGUI
 from folder_manager import FolderManager
+from ini_handler import IniHandler
+from text_ocr import TextOcr
+import admin
+
 
 
 class GuiUtil():
     def __init__(self, browser):
         self.downloadLock = threading.Lock()
-        self.configPath="setting.ini"
-        self.config = configparser.ConfigParser();
         self.browser=browser
-        
-        self.credFileDetected=False
-        self.credScopeDetected=False
-        self.ehndDetected=False
-
+        self.textOcr=TextOcr("")
+                
+        self.detectDict=dict()
+        self.detectDict["credFileDetected"]=False
+        self.detectDict["credScopeDetected"]=False
+        self.detectDict["ehndDetected"]=False
+        self.detectDict["windowocr"]=False
+     
         self.folder=FolderManager()
         self.folder.removeDir(["tmp","listItem"])
         self.folder.createDir(["tmp","listItem"])
+        self.iniHandler=IniHandler()
+        
+        listItemFolder="./listItem/"
+        if os.path.exists(listItemFolder):
+            shutil.rmtree(listItemFolder)
+
         
 
-        self.loadINI()
 
     def filterText(self, text):
         text = re.sub('[^0-9a-zA-Z]+', '', text)
@@ -48,153 +56,47 @@ class GuiUtil():
         self.browser.ExecuteFunction("showMessage", msg)        
 
 
-    ##ini setting-------------------------------------------------------------
-    def saveINIwithDict(self,settingDict):
-        self.config['setting'] = settingDict
-        with open(self.configPath, 'w') as configfile:
-            self.config.write(configfile)
 
-    def saveINI(self,tranlsator, lang, font, fontSize,detection):
-        self.config['setting'] = {'translator': tranlsator,
-                    'language': lang,
-                     'fontstyle': font,
-                     'fontsize':fontSize,
-                     "detectiondone":detection}
-        with open(self.configPath, 'w') as configfile:
-            self.config.write(configfile)
-                
-    def loadINI(self,):
-        self.config = configparser.ConfigParser();    
-        self.config.read(self.configPath)
-        if "setting" not in self.config.sections():
-            self.saveINI("EZTrans XP","korean","NotoSans","auto","notDone")  
-
-        self.iniDict=dict(self.config["setting"])
-
-    def loadTranslateSettingValue(self,):
-        self.loadINI()
-        settingValueDict=dict({})
-        settingValueDict["translator"]=self.getTranslaotrList()[self.iniDict["translator"]]
-        settingValueDict["language"]=self.getLanguageList()[self.iniDict["language"]]
-        settingValueDict["fontstyle"]=self.getFontStyleList()[self.iniDict["fontstyle"]]
-        settingValueDict["fontsize"]=self.iniDict["fontsize"]
-        return settingValueDict
-        
-        
-    def getTranslaotrList(self,):
-        translatorDict=dict({"EZTrans XP":"eztrans"})#,"Google":"google" })
-        return translatorDict
-        
-    def getLanguageList(self,):
-        LANGUAGES = {'afrikaans': 'af', 'albanian': 'sq', 'amharic': 'am', 'arabic': 'ar', 'armenian': 'hy', 'azerbaijani': 'az', 'basque': 'eu', 'belarusian': 'be', 'bengali': 'bn', 'bosnian': 'bs', 'bulgarian': 'bg', 'catalan': 'ca', 'cebuano': 'ceb', 'chichewa': 'ny', 'chinese (simplified)': 'zh-cn', 'chinese (traditional)': 'zh-tw', 'corsican': 'co', 'croatian': 'hr', 'czech': 'cs', 'danish': 'da', 'dutch': 'nl', 'english': 'en', 'esperanto': 'eo', 'estonian': 'et', 'filipino': 'tl', 'finnish': 'fi', 'french': 'fr', 'frisian': 'fy', 'galician': 'gl', 'georgian': 'ka', 'german': 'de', 'greek': 'el', 'gujarati': 'gu', 'haitian creole': 'ht', 'hausa': 'ha', 'hawaiian': 'haw', 'hebrew': 'iw', 'hindi': 'hi', 'hmong': 'hmn', 'hungarian': 'hu', 'icelandic': 'is', 'igbo': 'ig', 'indonesian': 'id', 'irish': 'ga', 'italian': 'it', 'japanese': 'ja', 'javanese': 'jw', 'kannada': 'kn', 'kazakh': 'kk', 'khmer': 'km', 'korean': 'ko', 'kurdish (kurmanji)': 'ku', 'kyrgyz': 'ky', 'lao': 'lo', 'latin': 'la', 'latvian': 'lv', 'lithuanian': 'lt', 'luxembourgish': 'lb', 'macedonian': 'mk', 'malagasy': 'mg', 'malay': 'ms', 'malayalam': 'ml', 'maltese': 'mt', 'maori': 'mi', 'marathi': 'mr', 'mongolian': 'mn', 'myanmar (burmese)': 'my', 'nepali': 'ne', 'norwegian': 'no', 'pashto': 'ps', 'persian': 'fa', 'polish': 'pl', 'portuguese': 'pt', 'punjabi': 'pa', 'romanian': 'ro', 'russian': 'ru', 'samoan': 'sm', 'scots gaelic': 'gd', 'serbian': 'sr', 'sesotho': 'st', 'shona': 'sn', 'sindhi': 'sd', 'sinhala': 'si', 'slovak': 'sk', 'slovenian': 'sl', 'somali': 'so', 'spanish': 'es', 'sundanese': 'su', 'swahili': 'sw', 'swedish': 'sv', 'tajik': 'tg', 'tamil': 'ta', 'telugu': 'te', 'thai': 'th', 'turkish': 'tr', 'ukrainian': 'uk', 'urdu': 'ur', 'uzbek': 'uz', 'vietnamese': 'vi', 'welsh': 'cy', 'xhosa': 'xh', 'yiddish': 'yi', 'yoruba': 'yo', 'zulu': 'zu'}
-        return LANGUAGES
-     
-    def getFontSizeList(self,):
-        sizeDict=dict({})
-        for i in range(5,100):
-            sizeDict[str(i)]=str(i)
-        
-        sizeDict["auto"]="auto"
-        return sizeDict
-        
-    def getFontStyleList(self,):
-        from matplotlib import font_manager
-        font_manager._rebuild()
-
-        # 리스트의 원소(폰트파일의 경로)만큼 반복
-        fontDict=dict({})
-        for v in font_manager.findSystemFonts(fontpaths=None, fontext='ttf'):
-            try:
-                # 각 폰트파일의 경로를 사용하여 폰트 속성 객체 얻기
-                fprop = font_manager.FontProperties(fname=v)
-                # 폰트 속성중 이름과 파일 경로를 딕셔러리로 구성하여 리스트에 추가.
-                fontDict[fprop.get_name()]=fprop.get_file()
-            except:
-                continue
-        fontDict=dict(sorted(fontDict.items()))    #sort key
-        
-        newFontDict=dict({})
-        for key in fontDict.keys():
-            newFontDict["""<span style="font-family:"""+key+""";">"""+key+"</span>"]=fontDict[key]    #apply font style on display
-        fontDict=newFontDict
-        
-        #<span style="font-family:Ami R;">Ami R</span>
-        fontDict["NotoSans"]="./font/NotoSansKR-Regular.otf"
-        return newFontDict
-        
-    def createSettingBoxHtml(self,optionTitle,optionKey,optionDict,selectedOption):    
+    ##ini setting-------------------------------------------------------------        
+    def createSettingBoxHtml(self,optionTitle,optionDict,selectedOption):    
         optionItemHtml=""
-        for key in optionDict.keys():
+        for key in sorted(optionDict.keys()):   
+            selected=""
+            if key==selectedOption:
+                selected=" selected"
             optionItemHtml+="""
-            <div class="option">
-                <input type="radio" class="radio" id='"""+optionDict[key]+"""' "name="category" />
-                <label for='"""+optionDict[key]+"""'>"""+key+"""</label>
-            </div>
+            <option value='"""+optionDict[key]+"""'"""+selected+""">"""+key+""" </option>
             """            
-       
         optionBarHtml="""
         <div class="optionBoxContainer">
-          <h2 class='"""+optionKey+"""'>"""+optionTitle+"""</h2>
-          <div class="select-box">
-            <div class="options-container">
-              """+optionItemHtml+"""
-            </div>
-            <div class="selected">
-              """+selectedOption+"""
-            </div>
+          <h2 class='"""+optionTitle+"""'>"""+optionTitle+"""</h2>
+           <div class="select_wrapper"><select name="" id="" class="form-control" onfocus='this.size=5; ' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+              """+optionItemHtml+"""  
+            </select>
           </div>
         </div>
         """
         return optionBarHtml 
     def createSettingBoxListHtml(self,):
         boxListHtml=""
-        boxListHtml+=self.createSettingBoxHtml("Translator","translator", self.getTranslaotrList(),self.iniDict["translator"])
-        boxListHtml+=self.createSettingBoxHtml("Language", "language",self.getLanguageList(),self.iniDict["language"])
-        boxListHtml+=self.createSettingBoxHtml("FontStyle","fontstyle", self.getFontStyleList(),self.iniDict["fontstyle"])
-        boxListHtml+=self.createSettingBoxHtml("FontSize", "fontsize",self.getFontSizeList(),self.iniDict["fontsize"])
+        for key in sorted(self.iniHandler.optionList.keys()):  
+           item=self.iniHandler.optionList[key]
+           if item["show"]==True:
+                boxListHtml+=self.createSettingBoxHtml(key, self.iniHandler.optionList[key]["optionItemDict"],self.iniHandler.currentSettingValDict[key])
         return boxListHtml
         
     def initSetting(self,):
         boxListHtml=self.createSettingBoxListHtml()
         self.browser.ExecuteFunction("createSettingBoxList", boxListHtml)
-        if self.iniDict["detectiondone"]=="done":
+        if self.iniHandler.currentSettingValDict["detectiondone"]=="done":
             self.browser.ExecuteFunction("showPage", "main_page")
+            for key in self.detectDict.keys():
+                self.detectDict[key]=True
         else:
             self.browser.ExecuteFunction("showPage", "start_page")
         
-    def setINIValue(self,name,value):
-        self.iniDict[name]=value
-        self.saveINIwithDict(self.iniDict)
-        
-
 
     ##start page-------------------------------------------------------------
-    
-    def getGoogleCred(self,):
-        SCOPES = ['https://www.googleapis.com/auth/drive']
-        creds = None
-        # The file token.pickle stores the user's access and refresh tokens, and is
-        # created automatically when the authorization flow completes for the first
-        # time.
-        if os.path.exists('token.pickle'):
-            with open('token.pickle', 'rb') as token:
-                creds = pickle.load(token)
-        # If there are no (valid) credentials available, let the user log in.
-        if not creds or not creds.valid:
-            if creds and creds.expired and creds.refresh_token:
-                creds.refresh(Request())
-            else:
-                flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)
-                creds = flow.run_local_server(port=0)
-            # Save the credentials for the next run
-            with open('token.pickle', 'wb') as token:
-                pickle.dump(creds, token)
-        service = build('drive', 'v3', credentials=creds)
-        return service
-
-
-    
     def openBrowser(self,url):
         webbrowser.open(url, new=2)
 
@@ -205,17 +107,12 @@ class GuiUtil():
         except ValueError:
             return False
 
+    def setClipboard(self,text):
+        pyperclip.copy(text)
     def getClipboard(self,):
-        try:
-            win32clipboard.OpenClipboard()
-            data = win32clipboard.GetClipboardData()
-            win32clipboard.CloseClipboard()
-        except:
-            data=""
-        return data
+        return pyperclip.paste()
     def checkClipboardChangedLoop(self,):
         previouseClipboard=self.getClipboard()  
-
         while True:
             time.sleep(1)
             if self.getClipboard()!=previouseClipboard and self.getClipboard()!="":
@@ -247,61 +144,95 @@ class GuiUtil():
         else:
             return os.path.join(os.path.expanduser('~'), 'downloads')
             
+            
+            
+    ##environment detection-------------------------------------------------------------            
     def checkCredentialsDownloadedLoop(self,):
-        if self.iniDict["detectiondone"]=="done":
-            return
         while(not os.path.exists(os.path.join(self.get_download_path(),'credentials.json')) and  not os.path.exists('credentials.json')):
             time.sleep(1.)
         if os.path.exists(os.path.join(self.get_download_path(),'credentials.json')):
             shutil.copy(os.path.join(self.get_download_path(),'credentials.json'), "./")      
         self.showJSMessage("credentials.json detected")
-        self.credFileDetected =True
+        self.detectDict["credFileDetected"]=True
         self.checkDetectionAllDone()
         
-    def checkCredentialsDownloaded(self,):
-        t = threading.Thread(target=self.checkCredentialsDownloadedLoop, args=())
-        t.daemon = True
-        t.start()
     def checkCredScopeLoop(self,):
         while(not os.path.exists("./token.pickle")):
-            time.sleep(1.)
-            
+            time.sleep(1.)    
         self.showJSMessage("credential scope detected")
-        self.credScopeDetected =True
+        self.detectDict["credScopeDetected"]=True
         self.checkDetectionAllDone()
         
-        
-    def checkCredScope(self,):
-        t = threading.Thread(target=self.checkCredScopeLoop, args=())
-        t.daemon = True
-        t.start()
     def checkEhndLoop(self,):
         while(not os.path.exists("C:\Program Files (x86)\ChangShinSoft\ezTrans XP\J2KEngineH.dll")):
             time.sleep(1.)
         self.showJSMessage("eztrans ehnd detected")
-        self.ehndDetected =True
+        self.detectDict["ehndDetected"]=True
         self.checkDetectionAllDone()
+    def checkWindowOcrLoop(self,):
+        while(not self.textOcr.checkWindowOcr()):
+            time.sleep(1.)
+        self.showJSMessage("window ocr detected")
+        self.detectDict["windowocr"]=True
+        self.checkDetectionAllDone()
+    
+    def checkInstall(self,slideNum):
+        print(slideNum)
+        if slideNum==1:
+            checkFunc=self.checkCredentialsDownloadedLoop
+        elif slideNum==2:
+            checkFunc=self.checkCredScopeLoop
+        elif slideNum==3:
+            checkFunc=self.checkEhndLoop
+        elif slideNum==4:
+            checkFunc=self.checkWindowOcrLoop
         
-    def checkEhnd(self,):
-        t = threading.Thread(target=self.checkEhndLoop, args=())
+        
+        t = threading.Thread(target=checkFunc, args=())
         t.daemon = True
         t.start()
+         
+    def installWinOcr(self,):
+        admin.runAsAdmin(["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe ","""
+        $Capability = Get-WindowsCapability -Online | Where-Object { $_.Name -Like 'Language.OCR*ja-JP*' };
+        $Result = $Capability | Add-WindowsCapability -Online;
+        if ($Result.RestartNeeded -eq $True) { Restart-Computer -Force };
+        """])
      
     def checkDetectionAllDone(self,):
-        if self.credFileDetected and self.credScopeDetected and self.ehndDetected:
-            self.setINIValue("detectiondone","done")
+        for key in self.detectDict.keys():
+            if self.detectDict[key]==False:
+                return    
+        self.iniHandler.setINIValue("detectiondone","done")    #if all true check done
 
+    def checkIsRunnableEvn(self,):
+        currentSetting=self.iniHandler.getCurrentSetting()
+        
+        if currentSetting["Translator"]=="eztrans":
+            if self.detectDict["ehndDetected"]==False:
+                self.showJSMessage("eztrans environment setup is required")
+                return False
+        elif currentSetting["OCR"]=="googleocr":
+            if self.detectDict["credFileDetected"]==False or self.detectDict["credScopeDetected"]==False:
+                self.showJSMessage("google ocr environment setup is required")
+                return False        
+        elif currentSetting["OCR"]=="windowocr":
+            if self.detectDict["windowocr"]==False:
+                self.showJSMessage("windowocr environment setup is required")
+                return False
+        return True
+        
     
     #download-------------------------------------------------------------
-    
     def startDownloadThreadFunc(self,url):
         itemId=self.filterText(url)
+        itemId=datetime.now().strftime("%Y%m%d%H%M%S")
         infoFunc=self.createDownloadListItemHtml
         progressFunc=self.setItemProgressFunc
         self.createListItemLoading(itemId)
         
         self.downloadLock.acquire()
-        mangaTrnaslator=MangaTranslatorGUI(url,self.loadTranslateSettingValue(),itemId,infoFunc,progressFunc)
+        mangaTrnaslator=MangaTranslatorGUI(url,self.iniHandler.getCurrentSetting(),itemId,infoFunc,progressFunc)
         result=mangaTrnaslator.processTranslation()
         self.downloadLock.release()
         
@@ -312,13 +243,13 @@ class GuiUtil():
             self.showJSMessage("downloaded to "+self.get_download_path())
         
     def startDownload(self,url):
-        t = threading.Thread(target=self.startDownloadThreadFunc, args=(url,))
-        t.daemon = True
-        t.start()
-            
+        if self.checkIsRunnableEvn():            
+            t = threading.Thread(target=self.startDownloadThreadFunc, args=(url,))
+            t.daemon = True
+            t.start()
+                
         
     def setItemProgressFunc(self,id,progress,time):
-        
         self.browser.ExecuteFunction("setItemProgress", id,progress,time)   
 
     def createListItemLoading(self,id):
@@ -335,7 +266,6 @@ class GuiUtil():
         self.browser.ExecuteFunction("addListItem", itemHtml)           
 
     def createDownloadListItemHtml(self,id,title,itemImage,itemPages):
-    
         itemHtml="""
           <div class="li_contents">   
              <img class="li_img" src='"""+itemImage+"""'  id="thumb"/> 
@@ -351,7 +281,6 @@ class GuiUtil():
           </div> 
           <div class="progress-container"><div class="progress_bar" ></div></div> 
         """
-        
         self.browser.ExecuteFunction("changeListItem", id, itemHtml)   
 
 

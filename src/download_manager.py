@@ -1,10 +1,16 @@
 import subprocess    
 import glob 
 import os
+import requests
+from bs4 import BeautifulSoup
+import wget
+import os
+
+
 
 class DownloaderManager():
     def __init__(self, ):
-        pass
+        self.updateDownloader()
     
     def downloadUrl(self, url):
         p = subprocess.Popen(('./lib_/gallery-dl.exe', url))
@@ -19,7 +25,28 @@ class DownloaderManager():
         return downloadFileList,mangaName
     
     
-    
-    
-#p = subprocess.Popen(('./lib/gallery-dl.exe', "-d","abc",url))
-#p.wait()   
+    def updateDownloader(self,):
+        #get download link
+        webpage=requests.get("https://github.com/mikf/gallery-dl/releases/")
+        soup=BeautifulSoup(webpage.content,"html.parser")
+        mydivs = soup.findAll("div", {"class": "Box Box--condensed mt-3"})[0] #first continaer
+        for a in mydivs.find_all('a', href=True):                            #list all link
+          if a['href'][-4:]==".exe":                                       #LINK TO download exe
+            downloadLink="https://github.com"+a['href']
+
+
+        #check current version
+        if os.path.exists('./lib_/gallery-dl.txt'):
+            with open('./lib_/gallery-dl.txt', "r") as file:
+                currentVersion = file.readline()
+
+            #download if new version available
+            if currentVersion!=downloadLink:
+                if os.path.exists(downloadLink):
+                    os.remove(downloadLink)
+                wget.download(downloadLink, './lib_/gallery-dl.exe')
+
+                with open('./lib_/gallery-dl.txt', "w") as file:
+                    file.write(downloadLink)
+
+

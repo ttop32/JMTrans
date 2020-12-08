@@ -1,5 +1,3 @@
-
-
 from manga_translator import MangaTranslator
 import os 
 from tqdm import tqdm
@@ -30,7 +28,6 @@ class MangaTranslatorGUI(MangaTranslator):
                 progressTime=bar.split('[')[-1]
                 progressTime=progressTime.split(',')[0]
                 self.func(progressPercent,progressTime)
-                
             except:
               pass
             else:
@@ -44,15 +41,12 @@ class MangaTranslatorGUI(MangaTranslator):
         
         
     def sendInfo(self,title,image,pages):
-        
         listItemFolder="./listItem/"
         imagePath = os.path.join(listItemFolder, os.path.basename(image))
         if not os.path.exists(imagePath):            
             if not os.path.exists(listItemFolder):
                 os.makedirs(listItemFolder)
             shutil.copy(image, listItemFolder)
-            
-        
         
         self.infoFunc(self.id,title,imagePath,str(pages))
         

@@ -1,0 +1,1 @@
+https://github.com/mikf/gallery-dl/releases/download/v1.15.4/gallery-dl.exe

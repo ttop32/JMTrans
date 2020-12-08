@@ -9,10 +9,14 @@ import utils.fp as fp
 import cv2
 from tqdm import tqdm
 import consts
+import tensorflow as tf
 
 class TextSegmenation():
     def __init__(self, ):
         pass
+        #tf.reset_default_graph
+        #core.load_model(consts.SNETPATH, '0.1.0')
+        #core.load_model(consts.CNETPATH, '0.1.0')
     
     def imgpath2mask(self, imgpath):
         return fp.go(
@@ -24,7 +28,12 @@ class TextSegmenation():
     def segmentPage(self,imgPath,outputInpaintedPath,outputTextOnlyPath):
         core.load_model(consts.SNETPATH, '0.1.0')
         core.load_model(consts.CNETPATH, '0.1.0')
-
+        
+        img = cv2.imread(imgPath) 
+        if img.shape[0]>3000:
+            img = cv2.resize(img, (int(3000*img.shape[1]/img.shape[0]),3000), interpolation = cv2.INTER_AREA)
+        cv2.imwrite(imgPath, img) 
+        
         fileName=os.path.basename(imgPath)
         oriImage = imgio.load(imgPath, imgio.IMAGE)                      #ori image
         maskImage  = imgio.mask2segmap(self.imgpath2mask(imgPath))        #mask image

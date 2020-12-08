@@ -30,6 +30,7 @@ a = Analysis(
 
 
 
+
 if not os.environ.get("PYINSTALLER_CEFPYTHON3_HOOK_SUCCEEDED", None):
     raise SystemExit("Error: Pyinstaller hook-cefpython3.py script was "
                      "not executed or it failed")

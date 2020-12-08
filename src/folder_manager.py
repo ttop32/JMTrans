@@ -18,7 +18,7 @@ class FolderManager():
         
 
     def setMainTempFolder(self,folderName):
-        self.mainTempFolder="tmp/"+datetime.now().strftime("%m%d%H%M%S")+"/"
+        self.mainTempFolder="tmp/"+datetime.now().strftime("%Y%m%d%H%M%S")+"/"
         self.oriFolder=self.mainTempFolder+"ori/"
         self.textOnlyFolder=self.mainTempFolder+"textOnly/"
         self.inpaintedFolder=self.mainTempFolder+"inpainted/"
@@ -53,14 +53,24 @@ class FolderManager():
     def saveFileAndRemove(self,mangaName):
         #save as zip file
         shutil.make_archive(mangaName, 'zip', self.transalatedFolder)
-        zipFile=mangaName+".zip"
+        
+        namePadding=""
+        i=0
+        if os.path.exists(os.path.join(self.get_download_path(),mangaName+namePadding+".zip")):
+            i+=1
+            namePadding="("+str(i)+")"
+            
+        zipFile=mangaName+namePadding+".zip"    
+        os.rename(mangaName+".zip", zipFile) 
+        
         shutil.move(zipFile, self.get_download_path())
         self.removeDir([self.mainTempFolder])
         
         return os.path.join(self.get_download_path(),zipFile)
         
 
-
+    def sendInfo(self,title,image,pages):
+        pass
 
 if __name__ == "__main__":
     folderManager=FolderManager()

@@ -23,19 +23,19 @@ def main():
         # noinspection PyUnresolvedReferences
         ctypes.windll.user32.SetWindowPos(window_handle, insert_after_handle,
                                           0, 0, 900, 600, SWP_NOMOVE)                  
-    browser.SetClientHandler(LoadHandler())
     guiUtil=GuiUtil(browser)
+    browser.SetClientHandler(LoadHandler())
     
     
     
     bindings = cef.JavascriptBindings()
-    bindings.SetFunction("setINIValue", guiUtil.setINIValue)
+    bindings.SetFunction("setINIValue", guiUtil.iniHandler.setINIValue)
     bindings.SetFunction("openBrowser", guiUtil.openBrowser)
-    bindings.SetFunction("getGoogleCred", guiUtil.getGoogleCred)
+    bindings.SetFunction("getGoogleCred", guiUtil.textOcr.getGoogleCred)
+    bindings.SetFunction("installWinOcr", guiUtil.installWinOcr)
     bindings.SetFunction("processInputUrl", guiUtil.processInputUrl)
-    bindings.SetFunction("checkCredentialsDownloaded", guiUtil.checkCredentialsDownloaded)
-    bindings.SetFunction("checkCredScope", guiUtil.checkCredScope)
-    bindings.SetFunction("checkEhnd", guiUtil.checkEhnd)
+    bindings.SetFunction("checkInstall", guiUtil.checkInstall)
+    
     
     
     browser.SetJavascriptBindings(bindings)
@@ -50,9 +50,8 @@ def main():
 class LoadHandler(object):
     def OnLoadEnd(self, browser, **_):
         guiUtil.initSetting()
-        #guiUtil.checkClipboardChanged()
+        guiUtil.checkClipboardChanged()
         
         
      
-
 main()

@@ -1,6 +1,5 @@
 
 <!-- Write your comments here 
-
 -->
 
 
@@ -418,113 +417,35 @@ ul li:nth-child(11n+1) .progress_bar{animation-delay: -2.2s;}
 
 
 
+
 /* -----------------setting option box------------------- */
 
+
 .optionBoxContainer {
+    display: flex; 
+    justify-content:  space-between ;
+    align-items: baseline ;
 }
 
-.select-box {
-  display: flex;
-  width: 400px;
-  flex-direction: column;
-  
+.select_wrapper{
+    width:150px;
+    height: 30px;
 }
 
-.select-box .options-container {
-  background: #2f3640;
-  color: #f5f6fa;
-  max-height: 0;
-  width: 100%;
-  opacity: 0;
-  transition: all 0.4s;
-  border-radius: 8px;
-  overflow: hidden;
-
-  order: 1;
-  
-  width:400px;
-  position:absolute;
-  z-index:10;
-
+select{
+    width:150px;
+    height: 30px;
+    position: static;
+}
+select:focus {
+    height: auto;
+    position: absolute;
 }
 
-.selected {
-  background: #2f3640;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  color: #f5f6fa;
-  position: relative;
-
-  order: 0;
-  
+h2{
+    margin:20px 10px 20px 0px;
 }
 
-.selected::after {
-  content: "";
-  background: url("icon/arrow-down.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-
-  position: absolute;
-  height: 100%;
-
-  transition: all 0.4s;
-}
-
-.select-box .options-container.active {
-  max-height: 150px;
-  opacity: 1;
-  overflow-y: scroll;
-  
-
-}
-
-.select-box .options-container.active + .selected::after {
-  transform: rotateX(180deg);
-  top: -6px;
-}
-
-.select-box .options-container::-webkit-scrollbar {
-  width: 8px;
-  background: #0d141f;
-  border-radius: 0 8px 8px 0;
-}
-
-.select-box .options-container::-webkit-scrollbar-thumb {
-  background: #525861;
-  border-radius: 0 8px 8px 0;
-}
-
-.select-box .option,
-.selected {
-  padding: 12px 24px;
-  cursor: pointer;
-}
-
-.select-box .option:hover {
-  background: #414b57;
-}
-
-.select-box label {
-  cursor: pointer;
-}
-
-.select-box .option .radio {
-  display: none;
-}
-
-
-
-
-input[type=text] {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 12px;
-  border: 0px solid #ccc;
-  background: #2f3640;
-  color: #f5f6fa;
-  border-radius: 8px;
-}
 
 
 
@@ -831,6 +752,7 @@ display:none;
     <div class="mySlides fade"> <video autoplay muted loop class="myVideo">  <source src="video/start1.webm" type="video/webm">  Your browser does not support HTML5 video.   </video></div>
     <div class="mySlides fade"> <video autoplay muted loop class="myVideo">  <source src="video/start2.webm" type="video/webm">  Your browser does not support HTML5 video.   </video></div>
     <div class="mySlides fade"> <video autoplay muted loop class="myVideo">  <source src="video/start3.webm" type="video/webm">  Your browser does not support HTML5 video.   </video></div>
+    <div class="mySlides fade"> <video autoplay muted loop class="myVideo">  <source src="video/start4.webm" type="video/webm">  Your browser does not support HTML5 video.   </video></div>
     
     </div>
 
@@ -859,6 +781,14 @@ display:none;
             </p>
             <button id="myBtn" onclick="openBrowser('https://blog.naver.com/waltherp38/221062272423')">Open</button> 
         </div>
+        <div class="content_text fade">
+            <h1>Google OCR</h1>
+            <p>Google ocr installation is required.<br>
+            Click open button to install ocr and restart.
+            
+            </p>
+            <button id="myBtn" onclick="installWinOcr()">Open</button> 
+        </div>
         
       
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -869,6 +799,7 @@ display:none;
       <span class="dot" onclick="currentSlide(1)"></span> 
       <span class="dot" onclick="currentSlide(2)"></span> 
       <span class="dot" onclick="currentSlide(3)"></span> 
+      <span class="dot" onclick="currentSlide(4)"></span> 
     </div>
     </div>
 </div>
@@ -887,106 +818,44 @@ display:none;
     </div>
     </label>
 
-
     <div class="setting_page" id="setting_page">    
     <div class="setting_container" id="setting_container" >
-        <!--
-        <div class="optionBoxContainer">
-          <h2>PW</h2>
-        <input type="text" id="id" placeholder="PW">
-        </div>
-        <div class="optionBoxContainer">
-          <h2>ID</h2>
-        <input type="text" id="pw" placeholder="ID">
-        </div>
-        -->
-    
-        <div class="optionBoxContainer">
-          <h2>Translator</h2>
 
-          <div class="select-box">
-            <div class="options-container">
-              
-
-              <div class="option">
-                <input type="radio" class="radio" id="google" name="category" />
-                <label for="google">Google</label>
-              </div>
-
-              <div class="option">
-                <input type="radio" class="radio" id="eztrans" name="category" />
-                <label for="eztrans">EZtrans XP</label>
-              </div>
-            </div>
-
-            <div class="selected">
-              Google
-            </div>
-            
-          </div>
-        </div>
-        <div class="optionBoxContainer">
-          <h2>Language</h2>
-
-          <div class="select-box">
-            <div class="options-container">
-              
-              <div class="option">
-                <input type="radio" class="radio" id="ko" name="category" />
-                <label for="ko">Korea</label>
-              </div>
-
-              <div class="option">
-                <input type="radio" class="radio" id="en" name="category" />
-                <label for="en">English</label>
-              </div>
-
-            </div>
-
-            <div class="selected">
-              Korea
-            </div>
-          </div>
-        </div>
         <div class="optionBoxContainer">
           <h2>Font Style</h2>
+            <div class="select_wrapper"><select name="" id="" class="form-control" onfocus='this.size=5; ' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+            <option value="">One</option>
+            <option value="">Two</option>
+            <option value="">Three</option>
+            <option value="">Four</option>
+            <option value="">Five</option>
+            <option value="">Six</option>
+            <option value="" selected>Seven</option>
+            <option value="">Eight</option>
+            <option value="">Nine</option>
+            <option value="">Ten</option>
+            </select></div>
 
-          <div class="select-box">
-            <div class="options-container">
-              
-
-              <div class="option">
-                <input type="radio" class="radio" id="Times" name="category" />
-                <label for="Times">Times</label>
-              </div>
-            </div>
-
-            <div class="selected">
-              Times
-            </div>
-          </div>
         </div>
         
         <div class="optionBoxContainer">
           <h2>Font Size</h2>
-
-          <div class="select-box">
-            <div class="options-container">
-              <div class="option">
-                <input type="radio" class="radio" id="10" name="category" />
-                <label for="10">10</label>
-              </div>
-
-            </div>
-
-            <div class="selected">
-              10
-            </div>
-          </div>
+            <div class="select_wrapper"><select name="" id="" class="form-control" onfocus='this.size=5; ' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+            <option value="">One</option>
+            <option value="">Two</option>
+            <option value="">Three</option>
+            <option value="">Four</option>
+            <option value="">Five</option>
+            <option value="">Six</option>
+            <option value="">Seven</option>
+            <option value="">Eight</option>
+            <option value="">Nine</option>
+            <option value="" selected>Ten</option>
+            </select></div>
         </div>
-        
+      
         </div>
-        </div>    
+        </div>      
         
         
 
@@ -1038,7 +907,6 @@ display:none;
           <div class="progress-container">
             <div class="progress_bar" ></div>
           </div>
-
           </li>
            -->
         
@@ -1069,9 +937,10 @@ function showMessage(msg) {
 }
 
 
+
+
+
 //start page=====================================
-
-
 var slideIndex = 1;
 showSlides(slideIndex);
 function plusSlides(n) {
@@ -1081,16 +950,16 @@ function currentSlide(n) {
   showSlides(slideIndex = n);
 }
 function showSlides(n) {
-
   var i;
   var slides = document.getElementsByClassName("mySlides");
   var dots = document.getElementsByClassName("dot");
-   
+  var context = document.getElementsByClassName("content_text");
+
   if (n > slides.length) {
     document.getElementById("start_page").style.display = "none"; 
     document.getElementById("main_page").style.display = "block"; 
      return;
-  }   // overflow reutrn to 1 
+  }   // overflow 
   
   if (n < 1) {slideIndex = 1}               // lowerflow
   for (i = 0; i < slides.length; i++) {     // disable all slide visibility
@@ -1099,27 +968,15 @@ function showSlides(n) {
   for (i = 0; i < dots.length; i++) {       //disable all dots color
       dots[i].className = dots[i].className.replace(" active", "");
   }
-  slides[slideIndex-1].style.display = "block";  //set slide image
-  dots[slideIndex-1].className += " active";    //set dots 
-  
-  var context = document.getElementsByClassName("content_text");
   for (i = 0; i < context.length; i++) {     // disable all slide visibility
       context[i].style.display = "none";  
   } 
+  
+  slides[slideIndex-1].style.display = "block";  //set slide image
+  dots[slideIndex-1].className += " active";    //set dots 
   context[slideIndex-1].style.display = "block";  //set slide image
   
-  
-  
-  if (slideIndex == 1) {
-    checkCredentialsDownloaded(); 
-  } else if (slideIndex == 2) {
-    checkCredScope();  
-  } else if (slideIndex == 3) {
-    checkEhnd();  
-  } 
-
-
-
+  checkInstall(n); 
 }
 
 
@@ -1130,7 +987,6 @@ function showSlides(n) {
 
 
 //list image hovering =====================================
-
 var Controls = {
     init: function () {
         var imgLink = document.querySelectorAll("[id^=thumb]");
@@ -1212,42 +1068,25 @@ Controls.init();
 
 
 //setting select box =====================================
-
-function initSettingBoxList(){
+function initSettingBoxList(){    
     var containers=document.getElementsByClassName("optionBoxContainer");
     Array.prototype.forEach.call(containers, function(cont) {
-    cont.querySelector(".selected").addEventListener("click", () => {
-        Array.prototype.forEach.call(containers, function(cont2) {
-            cont2.querySelector(".options-container").classList.remove("active");      
+        var sel = cont.querySelector("select");
+        sel.addEventListener("change", function() {
+            setINIValue(cont.querySelector("h2").className,sel.value);
         });
-        cont.querySelector(".options-container").classList.toggle("active");
-    });
-
-    cont.querySelectorAll(".option").forEach(o => {
-      o.addEventListener("click", () => {
-        
-        cont.querySelector(".selected").innerHTML = o.querySelector("label").innerHTML;
-        
-        setINIValue(cont.querySelector("h2").className,o.querySelector("label").innerHTML);
-        
-        cont.querySelector(".options-container").classList.remove("active");
-      });
-    });
     });
 }
-
 function createSettingBoxList(content) {
 document.getElementById("setting_container").innerHTML=content;
 initSettingBoxList();
 } 
+
+
+
 //================================list item
-
-
-
 function addListItem(msg){
-    
     document.getElementById("empty").style.display="none";
-    
     var ulItem=document.getElementById("myUL");
     ulItem.innerHTML = msg+ulItem.innerHTML;
     Controls.init();
@@ -1257,14 +1096,10 @@ function changeListItem(id,msg){
     liItem.innerHTML = msg;
     Controls.init();
 }
-
-
 function removeListItem(id){
     var liItem=document.getElementById(id);
     liItem.remove(); 
 }
-
-
 function setItemProgress(id,progress,time) {
  const liItem=document.getElementById(id);
  liItem.getElementsByClassName("progress_bar")[0].style.width =progress+"%";
@@ -1272,23 +1107,27 @@ function setItemProgress(id,progress,time) {
 }
 
 
+
+
+
+
+
 //--------------------------url input
-
-
 // Execute a function when the user releases a key on the keyboard
 document.getElementById("myInput").addEventListener("keyup", function(event) {
   // Number 13 is the "Enter" key on the keyboard
   if (event.keyCode === 13) {
     // Cancel the default action, if needed
     event.preventDefault();
-    
     processInputUrl(document.getElementById("myInput").value);
   }
 });
 
 
-//------show page
 
+
+
+//------show page
 function showPage(name) {
     if (name=="start_page"){
     document.getElementById("start_page").style.display="block";
@@ -1298,7 +1137,6 @@ function showPage(name) {
     document.getElementById("main_page").style.display="block";
     }
 }
-
     
 </script>
 </body>

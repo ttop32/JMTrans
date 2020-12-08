@@ -1,7 +1,7 @@
 import os
 from tqdm import tqdm
-#from googletrans import Translator
-#translator = Translator()
+from google_trans_new import google_translator  
+translator = google_translator()  
 import pickle
 import subprocess
 
@@ -16,11 +16,10 @@ class TextTranslator():
             text_trans=translateFunc(text) if len(text)!=0 else ""
             textList_trans+=[text_trans] 
         return textList_trans
-    def translateGoogle(self,text,langCode):
-        pass
-        # text_trans=translator.translate(text,  src='ja',dest=langCode,).text
-        # text_trans=text_trans.replace('\u200b', '')
-        # return text_trans
+    def translateGoogle(self,text):
+        text_trans=translator.translate(text, lang_tgt=self.language,) 
+        return text_trans
+        
     def translateEztrans(self,text):
         with open('input.txt', 'wb') as f:
             pickle.dump(text, f)    
@@ -31,14 +30,14 @@ class TextTranslator():
         if os.path.exists('input.txt'):  os.remove('input.txt')
         if os.path.exists('output.txt'):  os.remove('output.txt')
         return text
+            
     def translate(self, textList):
         if self.translatorType=="google":
-            transFunc=lambda x: self.translateGoogle( x, self.language )
+            transFunc=self.translateGoogle
         elif self.translatorType=="eztrans":
             transFunc=self.translateEztrans
         textList_trans=self.translateList(textList,transFunc )
         return textList_trans
         
-
 if __name__ == "__main__":
     pass

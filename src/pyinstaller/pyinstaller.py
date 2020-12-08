@@ -63,12 +63,15 @@ def main():
 
     # Make sure everything went fine
     curdir = os.path.dirname(os.path.abspath(__file__))
-    cefapp_dir = os.path.join(curdir, "dist", "cefapp")
-    executable = os.path.join(cefapp_dir, "cefapp"+EXE_EXT)
+    cefapp_dir = os.path.join(curdir, "dist", "JMTrans")
+    executable = os.path.join(cefapp_dir, "JMTrans"+EXE_EXT)
     if not os.path.exists(executable):
         print("Error: PyInstaller failed, main executable is missing: %s"
               % executable)
         sys.exit(1)
+
+    from distutils.dir_util import copy_tree
+    copy_tree("data", cefapp_dir)
 
     # Done
     print("OK. Created dist/ directory.")

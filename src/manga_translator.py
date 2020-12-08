@@ -5,6 +5,7 @@ from text_detection import TextDetection
 from text_ocr import TextOcr
 from text_translate import TextTranslator
 from text_draw import TextDraw
+from ini_handler import IniHandler
 
 import os
 import pickle
@@ -15,45 +16,35 @@ import threading
 class MangaTranslator():
     def __init__(self, url,settingValueDict):
         self.url=url
-        
-        self.translatorType=settingValueDict["translator"]
-        self.language=settingValueDict["language"]
-        self.font=settingValueDict["fontstyle"]
-        self.fontsize=settingValueDict["fontsize"]
-        
-        
-           
+        print(settingValueDict)
         self.textSegmentation=TextSegmenation()
         self.textDetection=TextDetection()
-        self.textOcr=TextOcr()
-        self.textTranslator=TextTranslator(self.translatorType,self.language)
-        self.textDraw=TextDraw(self.font,self.fontsize)
+        self.textOcr=TextOcr(settingValueDict["OCR"])
+        self.textTranslator=TextTranslator(settingValueDict["Translator"],settingValueDict["Language"])
+        self.textDraw=TextDraw(settingValueDict["FontStyle"],settingValueDict["FontSize"])
         self.folder=FolderManager()
-        
+        self.downloader=DownloaderManager()
         
         
         self.customTqdm=tqdm
         
     def processTranslation(self,):
-        ###folder init
-        self.folder.removeDir([self.folder.downloadPath])
-
-
-        ####download
-        downloader=DownloaderManager()
-        downloadFileList,mangaName=downloader.downloadUrl(self.url)
-        #downloadFileList,mangaName=downloader.getDownloadedFilePathList()
-        
+        ###folder init and download
+        useLocal=False
+        if useLocal:
+            downloadFileList,mangaName=self.downloader.getDownloadedFilePathList()
+        else:
+            self.folder.removeDir([self.folder.downloadPath])
+            downloadFileList,mangaName=self.downloader.downloadUrl(self.url)
+            
         if mangaName=="":
             print("download fail")
             return -1
         
         
+        
         oriFileList=self.folder.intitFolderEnv(downloadFileList,mangaName)
         self.sendInfo(mangaName,oriFileList[0],len(oriFileList))
-        print(mangaName)
-        
-        
         self.threadCounter=0
         self.lock = threading.Lock()
         self.lock1 = threading.Lock()
@@ -64,7 +55,6 @@ class MangaTranslator():
         #forloop
         #for fileName in tqdm(oriFileList): 
         #    self.processTranslationTask(fileName)
-        
         
         #thread start
         tList=[]
@@ -82,39 +72,36 @@ class MangaTranslator():
         
         ###save_file
         self.folder.saveFileAndRemove(mangaName)
-        
         return 1
         
         
         
     def processTranslationTask(self,fileName):
-                
-        self.lock1.acquire()
+
         ###segmentation
+        self.lock1.acquire()
         self.textSegmentation.segmentPage(fileName,self.folder.inpaintedFolder,self.folder.textOnlyFolder)
         self.lock1.release()
-        self.lock2.acquire()
-        
-        ###text_detection
-        textBoxList=self.textDetection.textDetect(fileName,self.folder.textOnlyFolder)
-        self.lock2.release()
-        self.lock3.acquire()
-        
-        ###text_ocr
-        textList=self.textOcr.getTextFromImg(fileName,textBoxList,self.folder.textOnlyFolder)
-        self.lock3.release()
-        self.lock4.acquire()
         
 
+        ###text_detection
+        textBoxList=self.textDetection.textDetect(fileName,self.folder.textOnlyFolder)
+        
+        
+        ###text_ocr
+        self.lock3.acquire()
+        textList=self.textOcr.getTextFromImg(fileName,textBoxList,self.folder.textOnlyFolder)
+        self.lock3.release()
+
+
         ###text_translation
+        self.lock4.acquire()
         textList_trans=self.textTranslator.translate(textList)
         self.lock4.release()
-        self.lock5.acquire()
         
         
         ###text_draw
         self.textDraw.drawTextToImage(fileName,textBoxList,textList_trans,self.folder.inpaintedFolder,self.folder.transalatedFolder)
-        self.lock5.release()
         
         
         #count finish
@@ -122,23 +109,16 @@ class MangaTranslator():
         self.threadCounter+=1
         self.lock.release()
 
-        
-        
-    
-        
-    def sendInfo(self,title,image,pages):
-        pass
-        
 
 
 if __name__ == "__main__":
-    settingDict=dict({'translator': "eztrans",
-                    'language': "ko",
-                     'fontstyle': "./font/NotoSansKR-Regular.otf",
-                     'fontsize':23})
-    mangaTranslator=MangaTranslator("",settingDict)
+    iniHandler=IniHandler()
+    setting=iniHandler.getCurrentSetting()
+    setting["Translator"]="google"
+    setting["OCR"]="windowocr"
+    
+    mangaTranslator=MangaTranslator("https://hitomi.la/doujinshi/%E5%B0%84%E7%B2%BE%E7%AE%A1%E7%90%86%E5%A7%94%E5%93%A1%E3%82%86%E3%81%8B%E3%82%8A%EF%BC%86%E3%81%82%E3%81%8B%E3%82%8A%E3%81%A8%E5%B0%84%E7%B2%BE%E6%8E%A8%E5%A5%A8%E5%A7%94%E5%93%A1ia%EF%BC%86one-%E6%97%A5%E6%9C%AC%E8%AA%9E-1793419.html",setting)
     mangaTranslator.processTranslation()
-                     
-    pass
+        
 
 

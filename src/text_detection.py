@@ -23,7 +23,6 @@ class TextDetection():
     """
     ############################text cropping rectangle
     def text_detect(self,img,ele_size=(8,2)): #
-        #https://github.com/qzane/text-detection
         if len(img.shape)==3:
             img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         img_sobel = cv2.Sobel(img,cv2.CV_8U,1,0)#same as default,None,3,1,0,cv2.BORDER_DEFAULT)
@@ -60,7 +59,7 @@ class TextDetection():
     def textDetect(self,imgPath,textOnlyFolder):
         fileName=os.path.basename(imgPath)
         img = cv2.imread(textOnlyFolder+fileName)
-        rectP,rect= self.text_detect(img,ele_size=(int(img.shape[1]/100*2.5),int(img.shape[0]/100*2.5)))  #x,y
+        rectP,rect= self.text_detect(img,ele_size=(int(img.shape[1]*0.020),int(img.shape[0]*0.025)))  #x,y
         rectList=[rectP,rect]
             
         return rectList
