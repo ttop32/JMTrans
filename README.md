@@ -11,9 +11,6 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 
 
 
-# gui
-![gui](doc/gui.jpg)
-
 # Result
 ![result](doc/result1.png)
 ![result](doc/result2.png)
@@ -22,6 +19,10 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 ![result](doc/result5.png)
 ![result](doc/result6.png)
 ![result](doc/result7.png)
+
+# gui
+![gui](doc/gui.jpg)
+
 
 # Required environment to run  
 - google ocr : google drive permission(credential file and scope file)
