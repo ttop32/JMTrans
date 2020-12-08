@@ -30,7 +30,7 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 - ez trans xp korea translator : ez trans xp program and ehnd 
 
 # How to use  
-- open the program and type manga image url then press enter
+- open the program and type manga site url then press enter
 - It process translation (it takes time)
 - it will create zip file on user's window download folder
 
