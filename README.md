@@ -12,7 +12,7 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 
 
 # gui
-![gui](doc/gui.png)
+![gui](doc/gui.jpg)
 
 # Result
 ![result](doc/result1.png)
