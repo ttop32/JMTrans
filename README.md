@@ -50,9 +50,6 @@ gallery-dl is used to download. Its support sites are:
 
 
 # Run python
-conda create --name py35 python=3.5  
-activate py35   
-pip install -r requirements.txt  
 python gui.py  
 
 # pip install 
