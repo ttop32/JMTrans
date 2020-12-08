@@ -73,12 +73,12 @@ pip install pyperclip
 pip install astor==0.8.0  
 pip uninstall h5py  
 
-or
-conda remove --name py35 --all
-conda create --name py35 python=3.5
-activate py35
-pip install -r requirements.txt
-pip freeze > requirements.txt
+or  
+conda remove --name py35 --all  
+conda create --name py35 python=3.5  
+activate py35  
+pip install -r requirements.txt  
+pip freeze > requirements.txt  
 
 
 
