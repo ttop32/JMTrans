@@ -121,11 +121,12 @@ class GuiUtil():
                 self.processInputUrl(currentClipboard)
                 
     def processInputUrl(self, url):
-        if not self.validateUrl(url):
-            self.showJSMessage("not a valid url, use http format")
-        else:
+        if self.validateUrl(url) or os.path.isdir(url):
             self.showJSMessage(url)
             self.startDownload(url)
+        else:
+            self.showJSMessage("not a valid url, use http format")
+            
         
     def checkClipboardChanged(self,):   
         t = threading.Thread(target=self.checkClipboardChangedLoop, args=())

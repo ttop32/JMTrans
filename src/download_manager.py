@@ -18,12 +18,18 @@ class DownloaderManager():
         downloadFileList,mangaName=self.getDownloadedFilePathList()
         return  downloadFileList,mangaName
     def getDownloadedFilePathList(self,):
-    
         downloadFileList=glob.glob("gallery-dl/*/*/*.*")
         downloadFileList.sort()
         mangaName=os.path.basename(glob.glob("gallery-dl/*/*")[0]) if len(downloadFileList)!=0 else ""
         return downloadFileList,mangaName
     
+    def getLocalDirFileList(self,path):
+        mangaName = os.path.basename(path) 
+        downloadFileList=glob.glob(os.path.join(path,"*"))
+        downloadFileList.sort()
+        return downloadFileList,mangaName
+        
+        
     
     def updateDownloader(self,):
         #get download link

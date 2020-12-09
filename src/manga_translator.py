@@ -29,14 +29,17 @@ class MangaTranslator():
         self.customTqdm=tqdm
         
     def processTranslation(self,):
+        
         ###folder init and download
-        useLocal=False
-        if useLocal:
-            downloadFileList,mangaName=self.downloader.getDownloadedFilePathList()
+        
+        if os.path.isdir(self.url):
+            downloadFileList,mangaName=self.downloader.getLocalDirFileList(self.url)
         else:
             self.folder.removeDir([self.folder.downloadPath])
             downloadFileList,mangaName=self.downloader.downloadUrl(self.url)
             
+            #downloadFileList,mangaName=self.downloader.getDownloadedFilePathList()
+        
         if mangaName=="":
             print("download fail")
             return -1
