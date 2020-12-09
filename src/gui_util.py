@@ -208,7 +208,6 @@ class GuiUtil():
 
     def checkIsRunnableEvn(self,):
         currentSetting=self.iniHandler.getCurrentSetting()
-        
         if currentSetting["Translator"]=="eztrans":
             if self.detectDict["ehndDetected"]==False:
                 self.showJSMessage("current setting is required ehnd setup")
