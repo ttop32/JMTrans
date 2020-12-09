@@ -211,15 +211,15 @@ class GuiUtil():
         
         if currentSetting["Translator"]=="eztrans":
             if self.detectDict["ehndDetected"]==False:
-                self.showJSMessage("eztrans environment setup is required")
+                self.showJSMessage("current setting is required ehnd setup")
                 return False
         elif currentSetting["OCR"]=="googleocr":
             if self.detectDict["credFileDetected"]==False or self.detectDict["credScopeDetected"]==False:
-                self.showJSMessage("google ocr environment setup is required")
+                self.showJSMessage("current setting is required googleocr setup")
                 return False        
         elif currentSetting["OCR"]=="windowocr":
             if self.detectDict["windowocr"]==False:
-                self.showJSMessage("windowocr environment setup is required")
+                self.showJSMessage("current setting is required windowocr setup")
                 return False
         return True
         
