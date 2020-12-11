@@ -26,7 +26,7 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 
 # Required environment to run  
 - google ocr : google drive permission(credential file and scope file)
-- window ocr : Microsoft.NET v4.0.30319 and window japanese ocr
+- window ocr : Microsoft.NET v4.0.30319,net core 3.1 runtime and window japanese ocr
 - ez trans xp korea translator : ez trans xp program and ehnd 
 
 # How to use  
