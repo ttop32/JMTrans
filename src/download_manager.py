@@ -4,7 +4,8 @@ import os
 import requests
 from bs4 import BeautifulSoup
 import wget
-import os
+import subprocess
+
 
 
 
@@ -13,8 +14,10 @@ class DownloaderManager():
         self.updateDownloader()
     
     def downloadUrl(self, url):
+        self.checkExCred(url)
         p = subprocess.Popen(('./lib_/gallery-dl.exe', url))
-        p.wait()   
+        p.wait()  
+        print("download done")
         downloadFileList,mangaName=self.getDownloadedFilePathList()
         return  downloadFileList,mangaName
     def getDownloadedFilePathList(self,):
@@ -29,9 +32,14 @@ class DownloaderManager():
         downloadFileList.sort()
         return downloadFileList,mangaName
         
-        
-    
+    def checkExCred(self,url):
+        if "exhentai" in url:
+            if not os.path.exists("lib_/gallery-dl.conf"):
+                p = subprocess.Popen(("lib_/gallery-dl-cookie/cookie_handler/cookie_handler.exe"))
+                p.wait()       
+            
     def updateDownloader(self,):
+        print("updateDownloader")
         #get download link
         webpage=requests.get("https://github.com/mikf/gallery-dl/releases/")
         soup=BeautifulSoup(webpage.content,"html.parser")

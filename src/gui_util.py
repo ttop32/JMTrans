@@ -11,6 +11,7 @@ import pickle
 from urllib.parse import urlparse
 import shutil
 from datetime import datetime 
+import urllib
 
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -122,6 +123,9 @@ class GuiUtil():
                 
     def processInputUrl(self, url):
         if self.validateUrl(url) or os.path.isdir(url):
+            if self.validateUrl(url) :
+                url = urllib.parse.urlparse(url)
+                url = url.scheme + "://" + url.netloc + urllib.parse.quote(url.path)
             self.showJSMessage(url)
             self.startDownload(url)
         else:
@@ -210,15 +214,15 @@ class GuiUtil():
         currentSetting=self.iniHandler.getCurrentSetting()
         if currentSetting["Translator"]=="eztrans":
             if self.detectDict["ehndDetected"]==False:
-                self.showJSMessage("current setting is required ehnd setup")
+                self.showJSMessage("ehnd setup is required for current setting")
                 return False
-        elif currentSetting["OCR"]=="googleocr":
+        if currentSetting["OCR"]=="googleocr":    
             if self.detectDict["credFileDetected"]==False or self.detectDict["credScopeDetected"]==False:
-                self.showJSMessage("current setting is required googleocr setup")
+                self.showJSMessage("googleocr setup is required for current setting")
                 return False        
-        elif currentSetting["OCR"]=="windowocr":
+        if currentSetting["OCR"]=="windowocr":
             if self.detectDict["windowocr"]==False:
-                self.showJSMessage("current setting is required windowocr setup")
+                self.showJSMessage("windowocr setup is required for current setting")
                 return False
         return True
         

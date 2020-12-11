@@ -5,6 +5,7 @@ import re
 import os
 import pickle
 
+#https://github.com/HelloKS/ezTransWeb
 class TransEngine:
     def __init__(self, ):
         mainPath='C:\Program Files (x86)\ChangShinSoft\ezTrans XP'

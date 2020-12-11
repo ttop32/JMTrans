@@ -37,7 +37,6 @@ class MangaTranslator():
         else:
             self.folder.removeDir([self.folder.downloadPath])
             downloadFileList,mangaName=self.downloader.downloadUrl(self.url)
-            
             #downloadFileList,mangaName=self.downloader.getDownloadedFilePathList()
         
         if mangaName=="":
