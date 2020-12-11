@@ -2,7 +2,7 @@
 get japanese manga from url to translate manga image using SickZil(text segmentation model), google ocr(or window ocr) and eztrans xp(or google translator)  
 gui version 0.3a is released. Window ocr and google translate api are now supported.  
 
-download latest version  (using eztrans xp(or google translator), support multi lang)  
+download latest version  (using eztrans xp and google translator), support multi lang)  
 https://github.com/ttop32/JMTrans/releases/latest/download/JMTrans.zip
   
 pre released colab version  (using google translator only, support multi lang)  
@@ -26,7 +26,7 @@ https://colab.research.google.com/drive/1XbR7fNXtT4TGlLI1FBcCQv7Gj5mlDvwb?usp=sh
 
 # Required environment to run  
 - google ocr : google drive permission(credential file and scope file)
-- window ocr : Microsoft.NET v4.0.30319 and window japanese ocr
+- window ocr : Microsoft.NET v4.0.30319,net core 3.1 runtime and window japanese ocr
 - ez trans xp korea translator : ez trans xp program and ehnd 
 
 # How to use  
@@ -86,12 +86,16 @@ pip freeze > requirements.txt
 - [Tesseract](https://github.com/tesseract-ocr/tesseract)  
 - [Pytesseract](https://pypi.python.org/pypi/pytesseract)  
 - [nhocr](https://github.com/fireae/nhocr)  
+- [google drive](https://developers.google.com/drive/api/v3/quickstart/python)  
+- [google_drive_ocr](https://tanaikech.github.io/2017/05/02/ocr-using-google-drive-api/)
+- [window10_ocr](https://medium.com/rkttu/using-windows-10-built-in-ocr-with-c-b5ca8665a14e)
 - [OpenCV with Python wrapper](https://pypi.org/project/opencv-python/)  
 - [text-detection](https://github.com/qzane/text-detection)  
 - [Google Translate API for Python](https://pypi.org/project/googletrans/)  
 - [google translate new](https://github.com/lushan88a/google_trans_new)  
 - [ehnd](https://github.com/sokcuri/ehnd)  
-- [google drive](https://developers.google.com/drive/api/v3/quickstart/python)  
+- [ezTransWeb](https://github.com/HelloKS/ezTransWeb)
 - [flaticon](https://www.flaticon.com/)  
 - [cefpython](https://github.com/cztomczak/cefpython)  
+
 
