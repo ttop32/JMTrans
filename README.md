@@ -2,7 +2,7 @@
 get japanese manga from url to translate manga image using SickZil(text segmentation model), google ocr(or window ocr) and eztrans xp(or google translator)  
 gui version 0.3a is released. Window ocr and google translate api are now supported.  
 
-download latest version  (using eztrans xp(or google translator), support multi lang)  
+download latest version  (using eztrans xp and google translator), support multi lang)  
 https://github.com/ttop32/JMTrans/releases/latest/download/JMTrans.zip
   
 pre released colab version  (using google translator only, support multi lang)  
