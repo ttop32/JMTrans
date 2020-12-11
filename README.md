@@ -91,6 +91,7 @@ pip freeze > requirements.txt
 - [Google Translate API for Python](https://pypi.org/project/googletrans/)  
 - [google translate new](https://github.com/lushan88a/google_trans_new)  
 - [ehnd](https://github.com/sokcuri/ehnd)  
+- [ezTransWeb](https://github.com/HelloKS/ezTransWeb)
 - [google drive](https://developers.google.com/drive/api/v3/quickstart/python)  
 - [flaticon](https://www.flaticon.com/)  
 - [cefpython](https://github.com/cztomczak/cefpython)  
