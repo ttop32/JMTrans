@@ -12,12 +12,15 @@ def main():
         cookies_dict=requests.utils.dict_from_cookiejar(cookies)
         print(cookies_dict)
         confPath='./lib_/gallery-dl.conf'
-        if os.path.exists(confPath):
-            with open(confPath) as f:
-                json_object = json.load(f)
-            json_object["extractor"]["exhentai"]={"cookie":cookies_dict}
-        else:
-            json_object={"extractor":{"exhentai":{"cookies":cookies_dict}}}
+        isIdExist="ipb_member_id" in cookies_dict.keys() and "ipb_pass_hash" in cookies_dict.keys()
+        
+        if isIdExist:
+            if os.path.exists(confPath):
+                with open(confPath) as f:
+                    json_object = json.load(f)
+                json_object["extractor"]["exhentai"]={"cookies":cookies_dict}
+            else:
+                json_object={"extractor":{"exhentai":{"cookies":cookies_dict}}}
 
 
         with open(confPath, 'w') as f:

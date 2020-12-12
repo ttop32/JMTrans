@@ -56,7 +56,7 @@ class FolderManager():
         
         namePadding=""
         i=0
-        if os.path.exists(os.path.join(self.get_download_path(),mangaName+namePadding+".zip")):
+        while os.path.exists(os.path.join(self.get_download_path(),mangaName+namePadding+".zip")):
             i+=1
             namePadding="("+str(i)+")"
             

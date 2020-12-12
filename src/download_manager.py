@@ -34,13 +34,15 @@ class DownloaderManager():
         
     def checkExCred(self,url):
         if "exhentai" in url:
-            if not os.path.exists("lib_/gallery-dl.conf"):
-                p = subprocess.Popen(("lib_/gallery-dl-cookie/cookie_handler/cookie_handler.exe"))
-                p.wait()       
-            
+            p = subprocess.Popen(("lib_/gallery-dl-cookie/cookie_handler.exe"))
+            p.wait()       
+        
     def updateDownloader(self,):
-        print("updateDownloader")
-        #get download link
+        versionPath='./lib_/gallery-dl.txt'
+        exePath='./lib_/gallery-dl.exe'
+
+
+        #check latest version 
         webpage=requests.get("https://github.com/mikf/gallery-dl/releases/")
         soup=BeautifulSoup(webpage.content,"html.parser")
         mydivs = soup.findAll("div", {"class": "Box Box--condensed mt-3"})[0] #first continaer
@@ -49,18 +51,18 @@ class DownloaderManager():
             downloadLink="https://github.com"+a['href']
 
 
-        #check current version
-        if os.path.exists('./lib_/gallery-dl.txt'):
-            with open('./lib_/gallery-dl.txt', "r") as file:
+        #check current holded version
+        currentVersion=""
+        if os.path.exists(versionPath):
+            with open(versionPath, "r") as file:
                 currentVersion = file.readline()
+            
+        #download if new version available
+        if currentVersion!=downloadLink or not os.path.exists(exePath):
+            print("updateDownloader")
+            with open(versionPath, "w") as file:
+                file.write(downloadLink)
 
-            #download if new version available
-            if currentVersion!=downloadLink:
-                if os.path.exists(downloadLink):
-                    os.remove(downloadLink)
-                wget.download(downloadLink, './lib_/gallery-dl.exe')
-
-                with open('./lib_/gallery-dl.txt', "w") as file:
-                    file.write(downloadLink)
-
-
+            if os.path.exists(exePath):
+                os.remove(exePath)
+            wget.download(downloadLink, exePath)
