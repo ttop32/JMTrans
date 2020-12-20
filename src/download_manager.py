@@ -15,8 +15,15 @@ class DownloaderManager():
     
     def downloadUrl(self, url):
         self.checkExCred(url)
-        p = subprocess.Popen(('./lib_/gallery-dl.exe', url))
-        p.wait()  
+        p=None
+        try:
+            p = subprocess.Popen(('./lib_/gallery-dl.exe', url))
+            p.wait()  
+        finally:
+            if p:
+                p.terminate()
+        
+            
         print("download done")
         downloadFileList,mangaName=self.getDownloadedFilePathList()
         return  downloadFileList,mangaName

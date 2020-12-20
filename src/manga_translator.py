@@ -61,9 +61,7 @@ class MangaTranslator():
         #thread start
         tList=[]
         for fileName in oriFileList:
-          t = threading.Thread(target=self.processTranslationTask, args=(fileName,))
-          t.daemon = True
-          t.start()
+          t = threading.Thread(target=self.processTranslationTask, args=(fileName,), daemon=True).start()
           tList+=[t]
         print("progess")
         #thread progress

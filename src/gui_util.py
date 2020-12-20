@@ -22,6 +22,8 @@ from folder_manager import FolderManager
 from ini_handler import IniHandler
 from text_ocr import TextOcr
 import admin
+import subprocess
+
 
 
 
@@ -30,6 +32,7 @@ class GuiUtil():
         self.downloadLock = threading.Lock()
         self.browser=browser
         self.textOcr=TextOcr("")
+
                 
         self.detectDict=dict()
         self.detectDict["credFileDetected"]=False
@@ -46,8 +49,17 @@ class GuiUtil():
         if os.path.exists(listItemFolder):
             shutil.rmtree(listItemFolder)
 
+        self.runGoodByeDpi()
+
+
+
+        
         
 
+    def runGoodByeDpi(self,):
+        def runGoodByeDpiThreadFunc():
+            admin.runAsAdmin(["lib_\\goodbyedpi\\goodbyedpi.exe "])
+        t = threading.Thread(target=runGoodByeDpiThreadFunc, args=(), daemon=True).start()
 
     def filterText(self, text):
         text = re.sub('[^0-9a-zA-Z]+', '', text)
@@ -133,9 +145,8 @@ class GuiUtil():
             
         
     def checkClipboardChanged(self,):   
-        t = threading.Thread(target=self.checkClipboardChangedLoop, args=())
-        t.daemon = True
-        t.start()
+        t = threading.Thread(target=self.checkClipboardChangedLoop, args=(), daemon=True).start()
+      
 
     def get_download_path(self,):
         """Returns the default downloads path for linux or windows"""
@@ -193,9 +204,8 @@ class GuiUtil():
             checkFunc=self.checkWindowOcrLoop
         
         
-        t = threading.Thread(target=checkFunc, args=())
-        t.daemon = True
-        t.start()
+        t = threading.Thread(target=checkFunc, args=(), daemon=True).start()
+        
          
     def installWinOcr(self,):
         admin.runAsAdmin(["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe ","""
@@ -248,9 +258,8 @@ class GuiUtil():
         
     def startDownload(self,url):
         if self.checkIsRunnableEvn():            
-            t = threading.Thread(target=self.startDownloadThreadFunc, args=(url,))
-            t.daemon = True
-            t.start()
+            t = threading.Thread(target=self.startDownloadThreadFunc, args=(url,), daemon=True).start()
+            
                 
         
     def setItemProgressFunc(self,id,progress,time):

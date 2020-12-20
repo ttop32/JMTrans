@@ -91,10 +91,11 @@ class TextOcr():
         
     def checkWindowOcr(self,):
         p = subprocess.Popen(('./lib_/winocr/winocr.exe'))
-        p.wait()       
-        with  open("./lib_/loadResult.txt", "r", encoding="utf-8" ) as f:   text = f.read()    #txt to str
-        if text=="True":
-            return True
+        p.wait() 
+        if os.path.exists("./lib_/loadResult.txt"):          
+            with  open("./lib_/loadResult.txt", "r", encoding="utf-8" ) as f:   text = f.read()    #txt to str
+            if text=="True":
+                return True
         return False
         
     def getTextFromImg(self,imgPath,rectList,textOnlyFolder):
