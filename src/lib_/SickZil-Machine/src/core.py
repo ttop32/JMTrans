@@ -1,11 +1,23 @@
 import os
 import consts
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = consts.TF_CPP_MIN_LOG_LEVEL
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH'] = 'true'
+
 # NOTE: above only work before tf was imported.
 import tensorflow as tf
 import numpy as np
 import utils.imutils as iu
 import utils.fp as fp
+
+
+
+config = tf.ConfigProto()
+config.gpu_options.allow_growth = True
+graph = tf.Graph()
+
+
+
+
 
 seg_limit = 4000000 # dev-machine: state, and init with user info...
 compl_limit = 657666 #  then.. what is the optimal size?
@@ -16,16 +28,20 @@ def set_limits(slimit, climit):
 
 def load_model(mpath, version):
     #graph_def = tf.GraphDef()
-    graph_def = tf.compat.v1.GraphDef()
-    #with tf.gfile.GFile(mpath, 'rb') as f:
-    with tf.io.gfile.GFile(mpath, 'rb') as f:
-        graph_def.ParseFromString(f.read())
-        tf.import_graph_def(
-            graph_def, 
-            name = consts.model_name(mpath, version)
-        )
-#load_model(consts.SNETPATH, '0.1.0')
-#load_model(consts.CNETPATH, '0.1.0')
+    
+    with graph.as_default():
+        graph_def = tf.compat.v1.GraphDef()
+        #with tf.gfile.GFile(mpath, 'rb') as f:
+        with tf.io.gfile.GFile(mpath, 'rb') as f:
+            graph_def.ParseFromString(f.read())
+            tf.import_graph_def(
+                graph_def, 
+                name = consts.model_name(mpath, version)
+            )
+load_model(consts.SNETPATH, '0.1.0')
+load_model(consts.CNETPATH, '0.1.0')
+sess = tf.Session(config=config,graph=graph)
+
 
 #----------------------------------------------------------------
 def segment_or_oom(segnet, inp, modulo=16):
@@ -90,7 +106,7 @@ def segmap(image):
     def decategorize(mask): 
         return iu.decategorize(mask, iu.rgb2wk_map)
 
-    with tf.compat.v1.Session() as sess:
+    with sess.as_default():
         snet_in  = consts.snet_in('0.1.0', sess)
         snet_out = consts.snet_out('0.1.0', sess)
         def snet(img): 
@@ -169,7 +185,8 @@ def inpainted(image, segmap):
     '''
     assert (255 >= image).all(), image.max()
     assert   (image >= 0).all(), image.min()
-    with tf.compat.v1.Session() as sess:
+    
+    with sess.as_default():
         cnet_in  = consts.cnet_in('0.1.0',sess)
         cnet_out = consts.cnet_out('0.1.0',sess)
         return inpaint(

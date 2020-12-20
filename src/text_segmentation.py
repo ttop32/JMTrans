@@ -26,8 +26,7 @@ class TextSegmenation():
             imgio.segmap2mask)
 
     def segmentPage(self,imgPath,outputInpaintedPath,outputTextOnlyPath):
-        core.load_model(consts.SNETPATH, '0.1.0')
-        core.load_model(consts.CNETPATH, '0.1.0')
+        
         
         img = cv2.imread(imgPath) 
         if img.shape[0]>3000:
