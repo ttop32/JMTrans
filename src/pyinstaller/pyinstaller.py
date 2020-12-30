@@ -73,6 +73,10 @@ def main():
     from distutils.dir_util import copy_tree
     copy_tree("data", cefapp_dir)
 
+    
+    shutil.make_archive("JMTrans", 'zip', cefapp_dir)
+    
+        
     # Done
     print("OK. Created dist/ directory.")
 

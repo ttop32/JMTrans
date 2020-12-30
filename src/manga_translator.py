@@ -18,7 +18,7 @@ class MangaTranslator():
         self.url=url
         print(settingValueDict)
         self.textSegmentation=TextSegmenation()
-        self.textDetection=TextDetection()
+        self.textDetection=TextDetection(settingValueDict["ContourSize"])
         self.textOcr=TextOcr(settingValueDict["OCR"])
         self.textTranslator=TextTranslator(settingValueDict["Translator"],settingValueDict["Language"])
         self.textDraw=TextDraw(settingValueDict["FontStyle"],settingValueDict["FontSize"])
@@ -29,9 +29,7 @@ class MangaTranslator():
         self.customTqdm=tqdm
         
     def processTranslation(self,):
-        
         ###folder init and download
-        
         if os.path.isdir(self.url):
             downloadFileList,mangaName=self.downloader.getLocalDirFileList(self.url)
         else:

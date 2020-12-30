@@ -25,14 +25,21 @@ class TextSegmenation():
             core.segmap,
             imgio.segmap2mask)
 
+    def resize(self,imgPath):
+        #text resize by 1000px height 
+        img = cv2.imread(imgPath) 
+        size=1000
+        if img.shape[0]>size:
+            img = cv2.resize(img, (int(size*img.shape[1]/img.shape[0]),size), interpolation = cv2.INTER_AREA)
+            cv2.imwrite(imgPath, img) 
+            
+            
     def segmentPage(self,imgPath,outputInpaintedPath,outputTextOnlyPath):
         
+        self.resize(imgPath)        #because of sickzil has poor quality on high resolution image
         
-        img = cv2.imread(imgPath) 
-        if img.shape[0]>3000:
-            img = cv2.resize(img, (int(3000*img.shape[1]/img.shape[0]),3000), interpolation = cv2.INTER_AREA)
-        cv2.imwrite(imgPath, img) 
         
+        #process sickzil
         fileName=os.path.basename(imgPath)
         oriImage = imgio.load(imgPath, imgio.IMAGE)                      #ori image
         maskImage  = imgio.mask2segmap(self.imgpath2mask(imgPath))        #mask image

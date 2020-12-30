@@ -1,7 +1,7 @@
 import configparser
 from matplotlib import font_manager
 
-
+import numpy as np
 
 class IniHandler():
     def __init__(self, ):    
@@ -13,7 +13,12 @@ class IniHandler():
         self.createOption("Translator",self.getTranslaotrList(),"EZTrans XP")
         self.createOption("Language",self.getLanguageList(),"korean")
         self.createOption("FontStyle",self.getFontStyleList(),"NotoSans")
-        self.createOption("FontSize",self.getFontSizeList(),"auto")
+        self.createOption("FontSize",self.getFontSizeList(),"auto")        
+        self.createOption("ContourSize",self.getContourSize(),"0.025")
+        
+
+        
+        
         self.createOption("detectiondone",{"done":"done","notDone":"notDone"},"notDone",show=False)
         self.currentSettingValDict=self.loadINI()
 
@@ -70,6 +75,17 @@ class IniHandler():
             sizeDict[str(i)]=str(i)
         sizeDict["auto"]="auto"
         return sizeDict
+    
+    def getContourSize(self,):
+        sizeDict=dict({}) 
+        
+        for i in list(np.arange(0.01,0.04,0.001).astype('float32')):
+            sizeDict['%.3f' % i]='%.3f' %i # 2decimal point
+        print(sizeDict)
+        
+        return sizeDict
+        
+        
 
     def getFontStyleList(self,):
         font_manager._rebuild()
