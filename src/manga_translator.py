@@ -114,8 +114,8 @@ if __name__ == "__main__":
     setting=iniHandler.getCurrentSetting()
     setting["Translator"]="google"
     setting["OCR"]="windowocr"
-    
-    mangaTranslator=MangaTranslator("https://hitomi.la/doujinshi/%E5%B0%84%E7%B2%BE%E7%AE%A1%E7%90%86%E5%A7%94%E5%93%A1%E3%82%86%E3%81%8B%E3%82%8A%EF%BC%86%E3%81%82%E3%81%8B%E3%82%8A%E3%81%A8%E5%B0%84%E7%B2%BE%E6%8E%A8%E5%A5%A8%E5%A7%94%E5%93%A1ia%EF%BC%86one-%E6%97%A5%E6%9C%AC%E8%AA%9E-1793419.html",setting)
+    url=""
+    mangaTranslator=MangaTranslator(url,setting)
     mangaTranslator.processTranslation()
         
 
